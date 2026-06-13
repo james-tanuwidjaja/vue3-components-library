@@ -231,4 +231,310 @@
       transform: rotate(360deg);
     }
   }
+
+  /* ---------------------------------------------------------------- */
+  /* Popover / dropdown panel                                         */
+  /* ---------------------------------------------------------------- */
+  .jt-popover__reference {
+    display: contents;
+  }
+
+  .jt-popover__panel {
+    z-index: 50;
+    overflow: auto;
+    background-color: var(--color-jt-surface);
+    color: var(--color-jt-on-surface);
+    border: 1px solid var(--color-jt-border);
+    border-radius: var(--radius-jt);
+    box-shadow:
+      0 10px 15px -3px rgba(0, 0, 0, 0.1),
+      0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Field control acting as a trigger (select/date). */
+  .jt-field__control--clickable {
+    cursor: pointer;
+  }
+
+  .jt-field__trigger-value {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.875rem;
+  }
+
+  .jt-field__placeholder {
+    color: var(--color-jt-muted);
+  }
+
+  .jt-field__chevron {
+    flex: none;
+    color: var(--color-jt-muted);
+    transition: transform 0.15s ease;
+  }
+
+  .jt-field__chevron--open {
+    transform: rotate(180deg);
+  }
+
+  /* ---------------------------------------------------------------- */
+  /* Select / option list                                             */
+  /* ---------------------------------------------------------------- */
+  .jt-select__search {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: inherit;
+    font-size: 0.875rem;
+  }
+
+  .jt-select__options {
+    list-style: none;
+    margin: 0;
+    padding: 0.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  .jt-select__option {
+    padding: 0.375rem 0.5rem;
+    border-radius: calc(var(--radius-jt) - 0.125rem);
+    cursor: pointer;
+    font-size: 0.875rem;
+    white-space: nowrap;
+  }
+
+  .jt-select__option--active {
+    background-color: var(--color-jt-surface-muted);
+  }
+
+  .jt-select__option--selected {
+    background-color: color-mix(in srgb, var(--color-jt-primary) 15%, transparent);
+    color: var(--color-jt-primary);
+    font-weight: 500;
+  }
+
+  .jt-select__empty {
+    padding: 0.5rem;
+    font-size: 0.8125rem;
+    color: var(--color-jt-muted);
+    text-align: center;
+  }
+
+  /* ---------------------------------------------------------------- */
+  /* Calendar                                                         */
+  /* ---------------------------------------------------------------- */
+  .jt-calendar {
+    padding: 0.5rem;
+    width: 16rem;
+  }
+
+  .jt-calendar__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+
+  .jt-calendar__title {
+    font-weight: 600;
+    font-size: 0.875rem;
+  }
+
+  .jt-calendar__nav {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    border-radius: calc(var(--radius-jt) - 0.125rem);
+    width: 1.75rem;
+    height: 1.75rem;
+    color: var(--color-jt-on-surface);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .jt-calendar__nav:hover {
+    background-color: var(--color-jt-surface-muted);
+  }
+
+  .jt-calendar__grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.125rem;
+  }
+
+  .jt-calendar__weekday {
+    text-align: center;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: var(--color-jt-muted);
+    padding: 0.25rem 0;
+  }
+
+  .jt-calendar__day {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    border-radius: calc(var(--radius-jt) - 0.125rem);
+    aspect-ratio: 1;
+    font-size: 0.8125rem;
+    color: var(--color-jt-on-surface);
+  }
+
+  .jt-calendar__day:hover:not(:disabled) {
+    background-color: var(--color-jt-surface-muted);
+  }
+
+  .jt-calendar__day--outside {
+    color: var(--color-jt-muted);
+    opacity: 0.6;
+  }
+
+  .jt-calendar__day--today {
+    box-shadow: inset 0 0 0 1px var(--color-jt-border);
+  }
+
+  .jt-calendar__day--selected {
+    background-color: var(--color-jt-primary);
+    color: var(--color-jt-on-primary);
+  }
+
+  .jt-calendar__day--selected:hover {
+    background-color: var(--color-jt-primary-hover);
+  }
+
+  .jt-calendar__day:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+
+  .jt-calendar__footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--color-jt-border);
+  }
+
+  .jt-calendar__time {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    margin-top: 0.5rem;
+  }
+
+  .jt-calendar__time input {
+    width: 3rem;
+    text-align: center;
+    border: 1px solid var(--color-jt-border);
+    border-radius: calc(var(--radius-jt) - 0.125rem);
+    padding: 0.25rem;
+    background: var(--color-jt-surface);
+    color: inherit;
+  }
+
+  /* ---------------------------------------------------------------- */
+  /* Data table                                                       */
+  /* ---------------------------------------------------------------- */
+  .jt-table__wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid var(--color-jt-border);
+    border-radius: var(--radius-jt);
+  }
+
+  .jt-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+    color: var(--color-jt-on-surface);
+  }
+
+  .jt-table th,
+  .jt-table td {
+    text-align: left;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--color-jt-border);
+    vertical-align: middle;
+  }
+
+  .jt-table thead th {
+    background-color: var(--color-jt-surface-muted);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .jt-table__sortable {
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .jt-table__sort-icon {
+    color: var(--color-jt-muted);
+    margin-inline-start: 0.25rem;
+    font-size: 0.75rem;
+  }
+
+  .jt-table__filters td {
+    padding: 0.375rem 0.5rem;
+    background-color: var(--color-jt-surface);
+  }
+
+  .jt-table tbody tr:hover {
+    background-color: color-mix(in srgb, var(--color-jt-surface-muted) 60%, transparent);
+  }
+
+  .jt-table__empty {
+    text-align: center;
+    color: var(--color-jt-muted);
+    padding: 1.5rem;
+  }
+
+  .jt-table__actions {
+    display: flex;
+    gap: 0.25rem;
+    white-space: nowrap;
+  }
+
+  .jt-table__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.5rem 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .jt-pagination {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+    color: var(--color-jt-muted);
+  }
+
+  .jt-pagination__btn {
+    border: 1px solid var(--color-jt-border);
+    background: var(--color-jt-surface);
+    color: var(--color-jt-on-surface);
+    border-radius: calc(var(--radius-jt) - 0.125rem);
+    width: 1.75rem;
+    height: 1.75rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .jt-pagination__btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
 }
