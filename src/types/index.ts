@@ -4,3 +4,4 @@ export * from './validation.type';
 export * from './form.type';
 export * from './table.type';
 export * from './dialog.type';
+export * from './layout.type';

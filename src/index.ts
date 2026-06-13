@@ -18,6 +18,7 @@ export {
   useDialog,
   openDialog,
   closeDialog,
+  useJtLayout,
   applyTheme,
   applyThemeColors,
   applyThemeMode,
@@ -38,7 +39,7 @@ export {
 } from './constants';
 
 // Injection keys (advanced use).
-export { JT_CONFIG_KEY, JT_FORM_KEY, JT_DIALOG_KEY } from './constants';
+export { JT_CONFIG_KEY, JT_FORM_KEY, JT_DIALOG_KEY, JT_LAYOUT_KEY } from './constants';
 
 // Utilities.
 export {

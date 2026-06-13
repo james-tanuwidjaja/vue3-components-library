@@ -16,3 +16,6 @@ export { default as JtSmartTable } from './JtSmartTable/JtSmartTable.vue';
 export { default as JtDialog } from './JtDialog/JtDialog.vue';
 export { default as JtDialogProvider } from './JtDialogProvider/JtDialogProvider.vue';
 export { default as JtForm } from './JtForm/JtForm.vue';
+export { default as JtLayout } from './JtLayout/JtLayout.vue';
+export { default as JtHeader } from './JtHeader/JtHeader.vue';
+export { default as JtSidebar } from './JtSidebar/JtSidebar.vue';
