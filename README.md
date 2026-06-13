@@ -365,6 +365,9 @@ if (confirmed) {
 - `openDialog(component, props?, { persistent })` → `Promise<T>`. With `persistent: true`, backdrop
   click and Escape won't close it.
 - Backdrop click / Escape / the header × resolve the promise with `undefined`.
+- **Stacked dialogs (modal-on-modal):** unlike `vue3-promise-dialog`, you can `await openDialog(...)`
+  from *inside* another dialog — each is rendered on its own overlay, resolves independently, and
+  Escape closes only the topmost one.
 - `JtDialog` is a presentational shell (`title`, `hideClose`, `width`; slots `default`, `title`,
   `footer`); you can also build fully custom dialog components.
 

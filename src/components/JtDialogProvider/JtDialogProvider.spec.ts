@@ -1,3 +1,4 @@
+/* eslint-disable vue/one-component-per-file -- inline test dialog components */
 import { describe, it, expect, afterEach } from 'vitest';
 import { mount } from '@vue/test-utils';
 import { defineComponent, h, nextTick } from 'vue';
@@ -58,6 +59,73 @@ describe('JtDialogProvider / openDialog', () => {
     (document.querySelector('.jt-dialog__overlay') as HTMLElement).click();
     await nextTick();
     expect(document.querySelector('.confirm')).not.toBeNull();
+
+    wrapper.unmount();
+  });
+
+  it('stacks a dialog opened from within another dialog (modal-on-modal)', async () => {
+    const Inner = defineComponent({
+      setup() {
+        const { close } = useDialog<string>();
+        return () =>
+          h('div', { class: 'inner' }, [
+            h('button', { class: 'inner-done', onClick: () => close('inner') }, 'Done'),
+          ]);
+      },
+    });
+
+    const Outer = defineComponent({
+      setup() {
+        const { close } = useDialog<string>();
+        const openInner = async () => {
+          const innerResult = await openDialog<string>(Inner);
+          close(`outer+${innerResult}`);
+        };
+        return () =>
+          h('div', { class: 'outer' }, [
+            h('button', { class: 'open-inner', onClick: openInner }, 'Open inner'),
+          ]);
+      },
+    });
+
+    const wrapper = mount(JtDialogProvider, { attachTo: document.body });
+
+    const result = openDialog<string>(Outer);
+    await nextTick();
+    expect(document.querySelectorAll('.jt-dialog__overlay')).toHaveLength(1);
+
+    // Open the inner dialog from inside the outer one.
+    (document.querySelector('.outer .open-inner') as HTMLElement).click();
+    await nextTick();
+    expect(document.querySelectorAll('.jt-dialog__overlay')).toHaveLength(2);
+    expect(document.querySelector('.inner')).not.toBeNull();
+
+    // Resolving the inner dialog flows back into the outer's awaiting code.
+    (document.querySelector('.inner .inner-done') as HTMLElement).click();
+    await expect(result).resolves.toBe('outer+inner');
+
+    await nextTick();
+    expect(document.querySelectorAll('.jt-dialog__overlay')).toHaveLength(0);
+
+    wrapper.unmount();
+  });
+
+  it('Escape closes only the topmost dialog', async () => {
+    const wrapper = mount(JtDialogProvider, { attachTo: document.body });
+
+    const first = openDialog(Confirm);
+    const second = openDialog(Confirm);
+    await nextTick();
+    expect(document.querySelectorAll('.jt-dialog__overlay')).toHaveLength(2);
+
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+    await expect(second).resolves.toBeUndefined();
+    await nextTick();
+    // The first dialog is still open.
+    expect(document.querySelectorAll('.jt-dialog__overlay')).toHaveLength(1);
+
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+    await expect(first).resolves.toBeUndefined();
 
     wrapper.unmount();
   });
