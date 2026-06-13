@@ -1,0 +1,9 @@
+/**
+ * Library stylesheet entry.
+ *
+ * Consumers import this once (via the package's "./styles" export). It bundles Tailwind,
+ * the design tokens, and the component classes into a single precompiled CSS file.
+ */
+@import 'tailwindcss';
+@import './tokens.css';
+@import './components.css';
