@@ -1,0 +1,39 @@
+/**
+ * Design tokens.
+ *
+ * Each Tailwind theme color resolves to a `--jt-*` runtime variable with a sensible
+ * fallback. `createJt({ theme })` writes those `--jt-*` variables onto the document
+ * root, so the whole palette is configurable at runtime without rebuilding the CSS.
+ */
+@theme {
+  /* Brand / semantic colors */
+  --color-jt-primary: var(--jt-primary, #2563eb);
+  --color-jt-primary-hover: var(--jt-primary-hover, #1d4ed8);
+  --color-jt-on-primary: var(--jt-on-primary, #ffffff);
+
+  --color-jt-surface: var(--jt-surface, #ffffff);
+  --color-jt-surface-muted: var(--jt-surface-muted, #f3f4f6);
+  --color-jt-on-surface: var(--jt-on-surface, #1f2937);
+
+  --color-jt-border: var(--jt-border, #d1d5db);
+  --color-jt-muted: var(--jt-muted, #6b7280);
+
+  --color-jt-error: var(--jt-error, #dc2626);
+  --color-jt-success: var(--jt-success, #16a34a);
+  --color-jt-warning: var(--jt-warning, #d97706);
+
+  /* Radius */
+  --radius-jt: var(--jt-radius, 0.5rem);
+}
+
+/**
+ * Dark theme overrides. `createJt({ theme: { defaultTheme: 'dark' } })` adds the
+ * `.jt-theme-dark` class to the document root; consumers can also toggle it manually.
+ */
+.jt-theme-dark {
+  --jt-surface: #1f2937;
+  --jt-surface-muted: #374151;
+  --jt-on-surface: #f9fafb;
+  --jt-border: #4b5563;
+  --jt-muted: #9ca3af;
+}
