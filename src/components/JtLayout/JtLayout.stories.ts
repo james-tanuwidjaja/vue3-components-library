@@ -8,9 +8,11 @@ import JtButton from '../JtButton/JtButton.vue';
 import type { JtMenuItem } from '@/types';
 
 const items: JtMenuItem[] = [
+  { type: 'title', label: 'Main' },
   { key: 'dashboard', label: 'Dashboard', href: '/dashboard', emoji: '🏠' },
   { key: 'orders', label: 'Orders', href: '/orders', emoji: '📦' },
   { key: 'customers', label: 'Customers', href: '/customers', emoji: '👥' },
+  { type: 'title', label: 'System', roles: ['admin'] },
   {
     key: 'admin',
     label: 'Administration',

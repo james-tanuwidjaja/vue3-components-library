@@ -1,52 +1,62 @@
 <template>
   <ul class="jt-menu">
-    <li v-for="item in accessibleItems" :key="itemKey(item)" class="jt-menu__item">
-      <component
-        :is="resolveTag(item)"
-        v-bind="resolveProps(item)"
-        class="jt-menu__link"
-        :class="{
-          'jt-menu__link--active': isActive(item),
-          'jt-menu__link--disabled': item.disabled,
-        }"
-        @click="onClick(item)"
-      >
-        <span class="jt-menu__icon">
-          <slot name="icon" :item="item">
-            <i v-if="typeof item.icon === 'string'" :class="item.icon"></i>
-            <component :is="item.icon" v-else-if="item.icon" />
-          </slot>
-        </span>
-        <span class="jt-menu__label">{{ item.label }}</span>
-        <svg
-          v-if="item.children?.length"
-          class="jt-menu__arrow"
-          :class="{ 'jt-menu__arrow--open': isOpen(item) }"
-          width="14"
-          height="14"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          aria-hidden="true"
-        >
-          <path d="m9 18 6-6-6-6" />
-        </svg>
-      </component>
+    <li
+      v-for="(item, index) in accessibleItems"
+      :key="item.key ?? item.label ?? index"
+      class="jt-menu__item"
+    >
+      <div v-if="item.type === 'divider'" class="jt-menu__divider" role="separator"></div>
 
-      <JtSidebarMenu
-        v-if="item.children?.length && isOpen(item)"
-        class="jt-menu__children"
-        :items="item.children"
-        :can-access="canAccess"
-        :link-component="linkComponent"
-        :current-path="currentPath"
-        @select="emit('select', $event)"
-      >
-        <template v-if="$slots.icon" #icon="iconProps">
-          <slot name="icon" :item="iconProps.item" />
-        </template>
-      </JtSidebarMenu>
+      <div v-else-if="item.type === 'title'" class="jt-menu__title">{{ item.label }}</div>
+
+      <template v-else>
+        <component
+          :is="resolveTag(item)"
+          v-bind="resolveProps(item)"
+          class="jt-menu__link"
+          :class="{
+            'jt-menu__link--active': isActive(item),
+            'jt-menu__link--disabled': item.disabled,
+          }"
+          @click="onClick(item)"
+        >
+          <span class="jt-menu__icon">
+            <slot name="icon" :item="item">
+              <i v-if="typeof item.icon === 'string'" :class="item.icon"></i>
+              <component :is="item.icon" v-else-if="item.icon" />
+            </slot>
+          </span>
+          <span class="jt-menu__label">{{ item.label }}</span>
+          <svg
+            v-if="item.children?.length"
+            class="jt-menu__arrow"
+            :class="{ 'jt-menu__arrow--open': isOpen(item) }"
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+          >
+            <path d="m9 18 6-6-6-6" />
+          </svg>
+        </component>
+
+        <JtSidebarMenu
+          v-if="item.children?.length && isOpen(item)"
+          class="jt-menu__children"
+          :items="item.children"
+          :can-access="canAccess"
+          :link-component="linkComponent"
+          :current-path="currentPath"
+          @select="emit('select', $event)"
+        >
+          <template v-if="$slots.icon" #icon="iconProps">
+            <slot name="icon" :item="iconProps.item" />
+          </template>
+        </JtSidebarMenu>
+      </template>
     </li>
   </ul>
 </template>
