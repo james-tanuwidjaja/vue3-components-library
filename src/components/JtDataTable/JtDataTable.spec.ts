@@ -43,7 +43,21 @@ describe('JtDataTable', () => {
       props: { columns, items, pageSize: 2, filterable: false },
     });
     expect(wrapper.findAll('tbody tr')).toHaveLength(2);
-    expect(wrapper.text()).toContain('1 / 2');
+    // Numbered pager: First / 1 2 / Last, plus the range summary.
+    expect(wrapper.text()).toContain('First');
+    expect(wrapper.text()).toContain('Last');
+    expect(wrapper.text()).toContain('1–2 of 3');
+  });
+
+  it('navigates to a specific page via the pager', async () => {
+    const wrapper = mount(JtDataTable, {
+      props: { columns, items, pageSize: 2, filterable: false },
+    });
+    // Click "Last" to jump to page 2 (1 remaining row).
+    const lastButton = wrapper.findAll('button').find((b) => b.text() === 'Last');
+    await lastButton!.trigger('click');
+    expect(wrapper.findAll('tbody tr')).toHaveLength(1);
+    expect(wrapper.text()).toContain('3–3 of 3');
   });
 
   it('shows skeleton rows when loading', () => {
