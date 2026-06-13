@@ -87,18 +87,23 @@
               </template>
 
               <template v-else>
-                <td
-                  v-for="column in columns"
-                  :key="column.key"
-                  :style="{ textAlign: column.align }"
-                >
+                <td v-for="column in columns" :key="column.key">
                   <slot
-                    :name="`cell:${column.key}`"
+                    :name="column.key"
                     :row="row"
                     :value="row[column.key]"
                     :column="column"
+                    :index="index"
                   >
-                    {{ formatCellValue(row[column.key], column, row) }}
+                    <slot
+                      :name="`cell:${column.key}`"
+                      :row="row"
+                      :value="row[column.key]"
+                      :column="column"
+                      :index="index"
+                    >
+                      {{ formatCellValue(row[column.key], column, row) }}
+                    </slot>
                   </slot>
                 </td>
                 <td>

@@ -38,6 +38,7 @@
             ref="searchRef"
             v-model="search"
             class="jt-select__search"
+            size="1"
             :placeholder="searchPlaceholder"
             @click.stop
           />

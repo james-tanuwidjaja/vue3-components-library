@@ -44,14 +44,23 @@
 
           <template v-else-if="paged.length">
             <tr v-for="(row, index) in paged" :key="rowKey(row, index)">
-              <td v-for="column in columns" :key="column.key" :style="{ textAlign: column.align }">
+              <td v-for="column in columns" :key="column.key">
                 <slot
-                  :name="`cell:${column.key}`"
+                  :name="column.key"
                   :row="row"
                   :value="row[column.key]"
                   :column="column"
+                  :index="index"
                 >
-                  {{ formatCellValue(row[column.key], column, row) }}
+                  <slot
+                    :name="`cell:${column.key}`"
+                    :row="row"
+                    :value="row[column.key]"
+                    :column="column"
+                    :index="index"
+                  >
+                    {{ formatCellValue(row[column.key], column, row) }}
+                  </slot>
                 </slot>
               </td>
               <td v-if="$slots.actions">
@@ -113,10 +122,13 @@ const props = withDefaults(
   },
 );
 
-const slots = defineSlots<{
-  actions?: (props: { row: any; index: number }) => any;
-  [key: `cell:${string}`]: (props: { row: any; value: any; column: JtTableColumn }) => any;
-}>();
+type CellSlotProps = { row: any; value: any; column: JtTableColumn; index: number };
+
+const slots = defineSlots<
+  {
+    actions?: (props: { row: any; index: number }) => any;
+  } & Record<string, ((props: CellSlotProps) => any) | undefined>
+>();
 
 const columns = toRef(props, 'columns');
 const items = toRef(props, 'items');

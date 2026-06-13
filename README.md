@@ -236,7 +236,9 @@ const columns: JtTableColumn[] = [
 
 <template>
   <JtDataTable :columns="columns" :items="rows" :page-size="10">
-    <template #cell:name="{ value }"><strong>{{ value }}</strong></template>
+    <!-- Custom cell via a slot named after the column key (vue-good-table-next style) -->
+    <template #name="{ row, value }"><strong>{{ value }}</strong></template>
+    <template #active="{ value }">{{ value ? '✅' : '—' }}</template>
     <template #actions="{ row }">
       <button @click="view(row)">View</button>
     </template>
@@ -245,7 +247,9 @@ const columns: JtTableColumn[] = [
 ```
 
 Props: `columns`, `items`, `itemKey` (default `'id'`), `filterable`, `pagination`, `pageSize`,
-`loading`. Slots: `cell:<key>` (custom cell), `actions` (trailing actions column).
+`loading`. **Slots:** a slot **named after a column's `key`** customizes that column's cell
+(slot props: `{ row, value, column, index }`) — e.g. `<template #name="{ value }">`; `cell:<key>`
+works as an alias; `actions` adds a trailing actions column. Headers and cells are left-aligned.
 
 ### JtSmartTable
 
