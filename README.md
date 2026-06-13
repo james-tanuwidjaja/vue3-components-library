@@ -8,9 +8,9 @@ validation, skeleton loading on every field, and Storybook docs.
 - **Install once, use everywhere:** `app.use(createJt({ ... }))`
 - **Tree-shakeable:** import components individually, or register them all via the plugin
 
-> **Status:** Phase 1 (foundation) — `JtButton`, `JtTextField`, `JtTextarea`, `JtForm`,
-> `JtSkeleton`. More components (number/money/date pickers, select, data tables) are on the
-> roadmap below.
+> **Components:** `JtButton`, `JtTextField`, `JtTextarea`, `JtNumberField`, `JtMoneyField`,
+> `JtSelect`, `JtDatePicker`, `JtDateTimePicker`, `JtDataTable`, `JtSmartTable`, `JtForm`,
+> `JtSkeleton`. Every field supports `loading` (skeleton) and renders validation errors below it.
 
 ---
 
@@ -117,6 +117,143 @@ Same field API as `JtTextField`, plus `rows`.
   <JtTextarea v-model="notes" label="Notes" :rows="4" :rules="[required()]" />
 </template>
 ```
+
+### JtNumberField
+
+Numeric input; `modelValue` is a `number` (or `null`). Supports `min`, `max`, `step`, plus the
+shared field props.
+
+```vue
+<template>
+  <JtNumberField v-model="qty" label="Quantity" :min="0" :max="99" :rules="[required()]" />
+</template>
+```
+
+### JtMoneyField
+
+Live thousand/decimal grouping. `modelValue` is the **raw number**; the display is formatted.
+Separators default to the plugin locale (`.` thousands / `,` decimal) and are overridable per field.
+
+```vue
+<template>
+  <JtMoneyField v-model="price" label="Price" prefix="Rp" />
+  <!-- US style: -->
+  <JtMoneyField v-model="usd" prefix="$" thousands="," decimal="." :precision="2" />
+</template>
+```
+
+### JtSelect
+
+Searchable dropdown (type to filter, like Vuetify autocomplete). The selected `value` can be **any
+type** — string, number, boolean, or object — and the value/label keys are configurable.
+
+```vue
+<script setup lang="ts">
+const items = [
+  { label: 'Indonesia', value: 'ID' },
+  { label: 'Singapore', value: 'SG' },
+];
+</script>
+
+<template>
+  <JtSelect
+    v-model="country"
+    label="Country"
+    :items="items"
+    item-value="value"
+    item-label="label"
+    clearable
+    :rules="[required()]"
+  />
+
+  <!-- Object values: pass a getter -->
+  <JtSelect v-model="user" :items="users" :item-value="(u) => u" item-label="name" />
+</template>
+```
+
+Props: `items`, `itemValue` (key or getter), `itemLabel` (key or getter), `searchable` (default
+`true`), `clearable`, `noDataText`, plus the shared field props. Slot `option` customizes rows.
+
+### JtDatePicker
+
+Calendar input. Clicking a day commits immediately (no confirm) and the display is formatted
+(`DD/MM/YYYY` by default, configurable). **Two values** via dual v-model:
+
+```vue
+<script setup lang="ts">
+import { ref } from 'vue';
+const iso = ref<string | null>(null); // 'YYYY-MM-DD'
+const formatted = ref(''); // 'DD/MM/YYYY'
+</script>
+
+<template>
+  <JtDatePicker v-model="iso" v-model:formatted="formatted" label="Birth date" clearable />
+</template>
+```
+
+Props: `displayFormat`, `min`/`max` (Date or `YYYY-MM-DD`), `clearable`, plus shared field props.
+
+### JtDateTimePicker
+
+Like `JtDatePicker` but with time inputs and a **confirm button**; `modelValue` is a `Date`.
+
+```vue
+<template>
+  <JtDateTimePicker v-model="appointment" label="Appointment" clearable />
+</template>
+```
+
+### JtDataTable
+
+Datatable-style display: pass column definitions and items. Per-column filtering is driven by the
+column `type` (string→text, number→number, date→date picker, select→dropdown, boolean→yes/no), plus
+sorting and pagination.
+
+```vue
+<script setup lang="ts">
+import type { JtTableColumn } from '@james-tanuwidjaja/vue3-components';
+
+const columns: JtTableColumn[] = [
+  { key: 'name', label: 'Name', type: 'string' },
+  { key: 'age', label: 'Age', type: 'number', align: 'right' },
+  { key: 'joined', label: 'Joined', type: 'date' },
+  { key: 'role', label: 'Role', type: 'select', items: roles },
+  { key: 'active', label: 'Active', type: 'boolean' },
+];
+</script>
+
+<template>
+  <JtDataTable :columns="columns" :items="rows" :page-size="10">
+    <template #cell:name="{ value }"><strong>{{ value }}</strong></template>
+    <template #actions="{ row }">
+      <button @click="view(row)">View</button>
+    </template>
+  </JtDataTable>
+</template>
+```
+
+Props: `columns`, `items`, `itemKey` (default `'id'`), `filterable`, `pagination`, `pageSize`,
+`loading`. Slots: `cell:<key>` (custom cell), `actions` (trailing actions column).
+
+### JtSmartTable
+
+Everything `JtDataTable` does, plus inline **add / edit / delete** with per-column validation
+(reuses the same rule functions). Use `v-model:items` and/or listen to `add` / `update` / `delete`.
+
+```vue
+<template>
+  <JtSmartTable
+    v-model:items="rows"
+    :columns="columns"
+    @add="onAdd"
+    @update="onUpdate"
+    @delete="onDelete"
+  />
+</template>
+```
+
+Columns gain `rules` (validation while editing) and `editable` (default `true`). Props:
+`addable`, `editable`, `deletable` (all default `true`), plus the `JtDataTable` props.
 
 ### JtForm
 
@@ -269,13 +406,10 @@ push to `main` (set **Settings → Pages → Source: GitHub Actions**):
 
 ---
 
-## Roadmap (next phases)
+## Roadmap (optional extras)
 
-`JtNumberField` · `JtMoneyField` (thousand/decimal separators) · `JtDatePicker`
-(dual `v-model` `YYYY-MM-DD` + `DD/MM/YYYY`) · `JtDateTimePicker` (Date + confirm) ·
-`JtSelect` (searchable, any value type) · `JtDataTable` (type-aware column filters) ·
-`JtSmartTable` (inline add/edit/delete). Plus `JtCheckbox`, `JtRadioGroup`, `JtSwitch`,
-`JtDialog`, `JtPagination`.
+Selection/utility components that can build on the same patterns: `JtCheckbox`, `JtRadioGroup`,
+`JtSwitch`, `JtDialog`/`JtModal`, `JtTooltip`, and multi-select support for `JtSelect`.
 
 ## License
 

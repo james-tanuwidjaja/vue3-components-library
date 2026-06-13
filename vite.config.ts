@@ -20,7 +20,7 @@ export default defineConfig({
       tsconfigPath: './tsconfig.json',
       entryRoot: 'src',
       include: ['src/**/*.ts', 'src/**/*.vue'],
-      exclude: ['src/**/*.stories.ts', 'src/**/*.spec.ts'],
+      exclude: ['src/**/*.stories.ts', 'src/**/*.spec.ts', 'src/test/**'],
       insertTypesEntry: true,
     }),
   ],
@@ -34,7 +34,7 @@ export default defineConfig({
     },
     rollupOptions: {
       // Keep peer/runtime deps out of the bundle.
-      external: ['vue', /^date-fns($|\/)/],
+      external: ['vue', /^date-fns($|\/)/, /^@floating-ui($|\/)/],
       output: {
         globals: { vue: 'Vue' },
       },

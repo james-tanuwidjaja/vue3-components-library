@@ -13,6 +13,8 @@ export {
   useJtConfig,
   useDefaults,
   useField,
+  useClickOutside,
+  useTableData,
   applyTheme,
   applyThemeColors,
   applyThemeMode,
@@ -46,6 +48,10 @@ export {
   parseMoney,
   deepClone,
   deepEqual,
+  formatCellValue,
+  matchesFilter,
+  compareValues,
+  nextSortDirection,
 } from './utils';
 export type { MoneyFormatOptions } from './utils/money.util';
 
