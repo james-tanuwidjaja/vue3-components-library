@@ -27,6 +27,15 @@
 }
 
 /**
+ * Layout sizing tokens (override on :root or a container to customize).
+ */
+:root {
+  --jt-header-height: 3.5rem;
+  --jt-sidebar-width: 16rem;
+  --jt-sidebar-rail-width: 4rem;
+}
+
+/**
  * Dark theme overrides. `createJt({ theme: { defaultTheme: 'dark' } })` adds the
  * `.jt-theme-dark` class to the document root; consumers can also toggle it manually.
  */

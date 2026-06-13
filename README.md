@@ -13,8 +13,9 @@ validation, skeleton loading on every field, and Storybook docs.
 > **Components:** `JtButton`, `JtTextField`, `JtTextarea`, `JtNumberField`, `JtMoneyField`,
 > `JtSelect` (single + multiple), `JtCheckbox`, `JtSwitch`, `JtRadioGroup`, `JtDatePicker`,
 > `JtDateTimePicker`, `JtDataTable`, `JtSmartTable`, `JtForm`, `JtTooltip`, `JtDialog`
-> (promise-based), `JtSkeleton`. Every field supports `loading` (skeleton) and renders validation
-> errors below it.
+> (promise-based), `JtSkeleton`, and layout primitives `JtLayout` / `JtHeader` / `JtSidebar`
+> (collapsible, permission-aware menu). Every field supports `loading` (skeleton) and renders
+> validation errors below it.
 
 ---
 
@@ -427,6 +428,88 @@ The loading primitive used by every field; usable on its own.
   <JtSkeleton variant="circle" width="3rem" height="3rem" />
 </template>
 ```
+
+---
+
+## Layout (JtLayout / JtHeader / JtSidebar)
+
+App-shell primitives. `JtLayout` is a CSS-grid wrapper (header on top, sidebar on the left, main
+content) that **owns the sidebar collapsed state** and shares it, so `JtHeader` can swap its brand
+for a submark when the sidebar is minimized.
+
+```vue
+<script setup lang="ts">
+import { ref } from 'vue';
+import { RouterLink } from 'vue-router';
+import type { JtMenuItem } from '@james-tanuwidjaja/vue3-components';
+
+const collapsed = ref(false);
+const userRoles = ['admin'];
+
+const items: JtMenuItem[] = [
+  { label: 'Dashboard', to: '/dashboard', icon: 'mdi mdi-home' },
+  { label: 'Orders', to: '/orders', icon: OrdersIcon },          // string class OR component
+  {
+    label: 'Administration',
+    icon: 'mdi mdi-cog',
+    roles: ['admin'],                                            // arbitrary field for canAccess
+    children: [
+      { label: 'Users', to: '/admin/users' },
+      { label: 'Roles', to: '/admin/roles' },
+    ],
+  },
+];
+
+// Single predicate decides visibility (recursively); read any field you put on the item.
+const canAccess = (item: JtMenuItem) =>
+  !item.roles || (item.roles as string[]).some((r) => userRoles.includes(r));
+</script>
+
+<template>
+  <JtLayout v-model:collapsed="collapsed" :expand-on-hover="true">
+    <template #header>
+      <JtHeader title="Dashboard">
+        <template #brand><img src="/logo.svg" alt="Acme" /></template>
+        <template #submark><img src="/mark.svg" alt="Acme" /></template>
+        <template #actions><JtButton variant="text">Sign out</JtButton></template>
+      </JtHeader>
+    </template>
+
+    <template #sidebar>
+      <JtSidebar
+        :items="items"
+        :can-access="canAccess"
+        :link-component="RouterLink"
+        :current-path="$route.path"
+        @select="onSelect"
+      >
+        <template #top><img src="/logo.svg" alt="Acme" /></template>
+        <template #bottom>v1.0.0 · © 2026 Acme</template>
+      </JtSidebar>
+    </template>
+
+    <!-- main content -->
+    <RouterView />
+  </JtLayout>
+</template>
+```
+
+**Sidebar** has three sections: `#top` (optional — logo), the **menu** (from `items`, or the default
+slot for custom content), and `#bottom` (optional — version/copyright).
+
+- **Menu items** (`JtMenuItem`): `{ label, icon?, to?, href?, children?, disabled?, ...extra }`.
+  Items with `to` render via `linkComponent` (pass `RouterLink`); `href` renders an `<a>`; both also
+  emit `select(item)`. `children` makes an expandable group (auto-opens the active branch).
+- **Icons:** `icon` is a CSS class string (icon fonts) **or** a component; a per-item `#icon` scoped
+  slot (`{ item }`) overrides both.
+- **Permissions:** pass `canAccess(item) => boolean`; it filters items and their children. Put any
+  fields you need (`roles`, `permission`, …) on the item and read them in the predicate.
+- **Minimize:** collapsed shows **icons only (rail)**; with `expandOnHover`, hovering the rail
+  expands it over the content to reveal labels. Active item via `currentPath` (matches `to`/`href`).
+
+`JtHeader` and `JtSidebar` also work **standalone** (outside `JtLayout`): each takes a
+`collapsed` `v-model`. Layout sizing is tokenized: `--jt-header-height`, `--jt-sidebar-width`,
+`--jt-sidebar-rail-width`.
 
 ---
 
