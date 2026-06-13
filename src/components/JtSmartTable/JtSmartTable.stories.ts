@@ -7,7 +7,7 @@ import type { JtTableColumn } from '@/types';
 
 const columns: JtTableColumn[] = [
   { key: 'name', label: 'Name', type: 'string', rules: [required('Name is required')] },
-  { key: 'age', label: 'Age', type: 'number', align: 'right' },
+  { key: 'age', label: 'Age', type: 'number' },
   {
     key: 'role',
     label: 'Role',

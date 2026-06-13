@@ -286,6 +286,7 @@
   /* ---------------------------------------------------------------- */
   .jt-select__search {
     width: 100%;
+    min-width: 0;
     border: none;
     outline: none;
     background: transparent;

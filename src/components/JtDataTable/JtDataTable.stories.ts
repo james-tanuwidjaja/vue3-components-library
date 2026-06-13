@@ -5,7 +5,7 @@ import type { JtTableColumn } from '@/types';
 
 const columns: JtTableColumn[] = [
   { key: 'name', label: 'Name', type: 'string' },
-  { key: 'age', label: 'Age', type: 'number', align: 'right' },
+  { key: 'age', label: 'Age', type: 'number' },
   { key: 'joined', label: 'Joined', type: 'date' },
   {
     key: 'role',
@@ -65,5 +65,28 @@ export const Loading: Story = {
     components: { JtDataTable },
     setup: () => ({ columns, items }),
     template: `<JtDataTable :columns="columns" :items="items" loading :page-size="5" />`,
+  }),
+};
+
+/**
+ * Custom cell rendering via a slot named after the column key
+ * (vue-good-table-next style): `<template #role="{ row, value }">…</template>`.
+ */
+export const CustomCells: Story = {
+  render: () => ({
+    components: { JtDataTable },
+    setup: () => ({ columns, items }),
+    template: `
+      <JtDataTable :columns="columns" :items="items" :page-size="5">
+        <template #role="{ value }">
+          <span class="jt-chip">{{ value }}</span>
+        </template>
+        <template #active="{ value }">
+          <span :style="{ color: value ? '#16a34a' : '#dc2626' }">
+            {{ value ? '● Active' : '○ Inactive' }}
+          </span>
+        </template>
+      </JtDataTable>
+    `,
   }),
 };

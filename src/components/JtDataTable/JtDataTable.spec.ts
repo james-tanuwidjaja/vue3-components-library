@@ -64,4 +64,16 @@ describe('JtDataTable', () => {
     const wrapper = mount(JtDataTable, { props: { columns, items, loading: true } });
     expect(wrapper.find('.jt-skeleton').exists()).toBe(true);
   });
+
+  it('renders a custom cell via a slot named after the column key', () => {
+    const wrapper = mount(JtDataTable, {
+      props: { columns, items, pagination: false, filterable: false },
+      slots: {
+        name: `<template #name="{ value }"><b class="custom">{{ value }}</b></template>`,
+      },
+    });
+    const custom = wrapper.findAll('.custom');
+    expect(custom).toHaveLength(3);
+    expect(custom[0].text()).toBe('Bob');
+  });
 });

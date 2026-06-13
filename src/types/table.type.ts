@@ -22,8 +22,6 @@ export interface JtTableColumn<T = any> {
   filterable?: boolean;
   /** Fixed column width (CSS). */
   width?: string;
-  /** Cell text alignment. */
-  align?: 'left' | 'center' | 'right';
   /** Options for `type: 'select'` (filter and SmartTable editing). */
   items?: unknown[];
   itemValue?: string | ((item: any) => unknown);
