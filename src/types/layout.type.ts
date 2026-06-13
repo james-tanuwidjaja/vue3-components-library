@@ -4,6 +4,11 @@ import type { Component, Ref } from 'vue';
 export interface JtMenuItem {
   /** Stable key; falls back to `label` when omitted. */
   key?: string | number;
+  /**
+   * Entry kind. `'title'` renders a non-clickable section caption, `'divider'` a separator line.
+   * Omitted (or `'item'`) is a normal clickable menu item.
+   */
+  type?: 'item' | 'title' | 'divider';
   label: string;
   /** Icon: a CSS class string (icon fonts) or a Vue component. */
   icon?: string | Component;

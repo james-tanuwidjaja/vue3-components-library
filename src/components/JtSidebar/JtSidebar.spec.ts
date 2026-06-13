@@ -72,4 +72,25 @@ describe('JtSidebar', () => {
     expect(active.exists()).toBe(true);
     expect(active.text()).toContain('Home');
   });
+
+  it('renders a non-clickable title and a divider', async () => {
+    const withSections: JtMenuItem[] = [
+      { type: 'title', label: 'Main' },
+      { key: 'home', label: 'Home', href: '/home' },
+      { type: 'divider', label: '' },
+      { type: 'title', label: 'System' },
+      { key: 'settings', label: 'Settings', href: '/settings' },
+    ];
+    const wrapper = mount(JtSidebar, { props: { items: withSections } });
+
+    const titles = wrapper.findAll('.jt-menu__title');
+    expect(titles.map((t) => t.text())).toEqual(['Main', 'System']);
+    expect(wrapper.find('.jt-menu__divider').exists()).toBe(true);
+    // Titles/dividers are not links.
+    expect(wrapper.findAll('.jt-menu__link')).toHaveLength(2);
+
+    // Clicking a title emits nothing.
+    await wrapper.find('.jt-menu__title').trigger('click');
+    expect(wrapper.emitted('select')).toBeFalsy();
+  });
 });

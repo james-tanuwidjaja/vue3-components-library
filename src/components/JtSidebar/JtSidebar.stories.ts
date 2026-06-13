@@ -6,6 +6,7 @@ import JtButton from '../JtButton/JtButton.vue';
 import type { JtMenuItem } from '@/types';
 
 const items: JtMenuItem[] = [
+  { type: 'title', label: 'Main' },
   { key: 'dashboard', label: 'Dashboard', href: '/dashboard', emoji: '🏠' },
   { key: 'orders', label: 'Orders', href: '/orders', emoji: '📦' },
   {

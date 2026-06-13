@@ -497,9 +497,12 @@ const canAccess = (item: JtMenuItem) =>
 **Sidebar** has three sections: `#top` (optional — logo), the **menu** (from `items`, or the default
 slot for custom content), and `#bottom` (optional — version/copyright).
 
-- **Menu items** (`JtMenuItem`): `{ label, icon?, to?, href?, children?, disabled?, ...extra }`.
+- **Menu items** (`JtMenuItem`): `{ label, icon?, to?, href?, children?, disabled?, type?, ...extra }`.
   Items with `to` render via `linkComponent` (pass `RouterLink`); `href` renders an `<a>`; both also
   emit `select(item)`. `children` makes an expandable group (auto-opens the active branch).
+- **Section headers:** set `type: 'title'` for a non-clickable caption, or `type: 'divider'` for a
+  separator line (e.g. `{ type: 'title', label: 'Main' }`). Both honor `canAccess`, and in the
+  collapsed rail a title becomes a thin separator.
 - **Icons:** `icon` is a CSS class string (icon fonts) **or** a component; a per-item `#icon` scoped
   slot (`{ item }`) overrides both.
 - **Permissions:** pass `canAccess(item) => boolean`; it filters items and their children. Put any
