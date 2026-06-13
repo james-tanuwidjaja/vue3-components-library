@@ -15,6 +15,9 @@ export {
   useField,
   useClickOutside,
   useTableData,
+  useDialog,
+  openDialog,
+  closeDialog,
   applyTheme,
   applyThemeColors,
   applyThemeMode,
@@ -35,7 +38,7 @@ export {
 } from './constants';
 
 // Injection keys (advanced use).
-export { JT_CONFIG_KEY, JT_FORM_KEY } from './constants';
+export { JT_CONFIG_KEY, JT_FORM_KEY, JT_DIALOG_KEY } from './constants';
 
 // Utilities.
 export {
