@@ -18,20 +18,41 @@
           @click="toggle"
           @keydown="onKeydown"
         >
+          <div v-if="multiple && selectedItems.length" class="jt-select__chips">
+            <span v-for="(item, i) in selectedItems" :key="i" class="jt-chip">
+              {{ resolveLabel(item) }}
+              <button
+                v-if="!disabled"
+                type="button"
+                class="jt-chip__remove"
+                aria-label="Remove"
+                @click.stop="selectItem(item)"
+              >
+                &times;
+              </button>
+            </span>
+          </div>
+
           <input
             v-if="open && searchable"
             ref="searchRef"
             v-model="search"
             class="jt-select__search"
-            :placeholder="selectedLabel || placeholder"
+            :placeholder="searchPlaceholder"
             @click.stop
           />
           <span
-            v-else
+            v-else-if="!multiple"
             class="jt-field__trigger-value"
             :class="{ 'jt-field__placeholder': !selectedLabel }"
           >
             {{ selectedLabel || placeholder }}
+          </span>
+          <span
+            v-else-if="!selectedItems.length"
+            class="jt-field__trigger-value jt-field__placeholder"
+          >
+            {{ placeholder }}
           </span>
 
           <button
@@ -109,6 +130,8 @@ const props = withDefaults(
     placeholder?: string;
     hint?: string;
     name?: string;
+    /** Allow selecting multiple values; `modelValue` becomes an array. */
+    multiple?: boolean;
     searchable?: boolean;
     clearable?: boolean;
     noDataText?: string;
@@ -154,14 +177,38 @@ function resolveLabel(item: unknown): string {
   return isObject(item) ? String(item[props.itemLabel] ?? '') : String(item);
 }
 
-const hasValue = computed(() => props.modelValue !== null && props.modelValue !== undefined);
+const selectedValues = computed<unknown[]>(() =>
+  props.multiple && Array.isArray(props.modelValue) ? props.modelValue : [],
+);
+
+const hasValue = computed(() =>
+  props.multiple
+    ? selectedValues.value.length > 0
+    : props.modelValue !== null && props.modelValue !== undefined,
+);
 
 const selectedItem = computed(() =>
   props.items.find((item) => deepEqual(resolveValue(item), props.modelValue)),
 );
 
+const selectedItems = computed(() =>
+  props.multiple
+    ? props.items.filter((item) =>
+        selectedValues.value.some((value) => deepEqual(value, resolveValue(item))),
+      )
+    : [],
+);
+
 const selectedLabel = computed(() =>
   selectedItem.value !== undefined ? resolveLabel(selectedItem.value) : '',
+);
+
+const searchPlaceholder = computed(() =>
+  props.multiple
+    ? selectedItems.value.length
+      ? ''
+      : props.placeholder
+    : selectedLabel.value || props.placeholder,
 );
 
 const filteredItems = computed(() => {
@@ -171,6 +218,9 @@ const filteredItems = computed(() => {
 });
 
 function isSelected(item: unknown): boolean {
+  if (props.multiple) {
+    return selectedValues.value.some((value) => deepEqual(value, resolveValue(item)));
+  }
   return deepEqual(resolveValue(item), props.modelValue);
 }
 
@@ -189,12 +239,22 @@ function close(): void {
 }
 
 function selectItem(item: unknown): void {
-  emit('update:modelValue', resolveValue(item));
+  const value = resolveValue(item);
+  if (props.multiple) {
+    // Toggle membership; keep the menu open for further selection.
+    const exists = selectedValues.value.some((current) => deepEqual(current, value));
+    const next = exists
+      ? selectedValues.value.filter((current) => !deepEqual(current, value))
+      : [...selectedValues.value, value];
+    emit('update:modelValue', next);
+    return;
+  }
+  emit('update:modelValue', value);
   close();
 }
 
 function clear(): void {
-  emit('update:modelValue', null);
+  emit('update:modelValue', props.multiple ? [] : null);
 }
 
 function onKeydown(event: KeyboardEvent): void {

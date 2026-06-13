@@ -67,4 +67,31 @@ describe('JtSelect', () => {
     const wrapper = mount(JtSelect, { props: { items: fruits, modelValue: 'c' } });
     expect(wrapper.find('.jt-field__trigger-value').text()).toBe('Cherry');
   });
+
+  it('toggles values as an array in multiple mode and keeps the menu open', async () => {
+    const wrapper = mount(JtSelect, {
+      props: { items: fruits, multiple: true, modelValue: [] },
+      attachTo: document.body,
+    });
+
+    await wrapper.find('.jt-field__control').trigger('click');
+    await nextTick();
+    (document.querySelectorAll('.jt-select__option')[0] as HTMLElement).click();
+
+    expect(wrapper.emitted('update:modelValue')?.at(-1)).toEqual([['a']]);
+    // Menu remains open for further selection.
+    expect(document.querySelectorAll('.jt-select__option').length).toBe(3);
+
+    wrapper.unmount();
+  });
+
+  it('renders chips for selected values in multiple mode', () => {
+    const wrapper = mount(JtSelect, {
+      props: { items: fruits, multiple: true, modelValue: ['a', 'c'] },
+    });
+    const chips = wrapper.findAll('.jt-chip');
+    expect(chips).toHaveLength(2);
+    expect(chips[0].text()).toContain('Apple');
+    expect(chips[1].text()).toContain('Cherry');
+  });
 });

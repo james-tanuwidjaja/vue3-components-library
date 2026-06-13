@@ -8,9 +8,13 @@ validation, skeleton loading on every field, and Storybook docs.
 - **Install once, use everywhere:** `app.use(createJt({ ... }))`
 - **Tree-shakeable:** import components individually, or register them all via the plugin
 
+📖 **[Live Storybook & component playground →](https://james-tanuwidjaja.github.io/vue3-components-library/)**
+
 > **Components:** `JtButton`, `JtTextField`, `JtTextarea`, `JtNumberField`, `JtMoneyField`,
-> `JtSelect`, `JtDatePicker`, `JtDateTimePicker`, `JtDataTable`, `JtSmartTable`, `JtForm`,
-> `JtSkeleton`. Every field supports `loading` (skeleton) and renders validation errors below it.
+> `JtSelect` (single + multiple), `JtCheckbox`, `JtSwitch`, `JtRadioGroup`, `JtDatePicker`,
+> `JtDateTimePicker`, `JtDataTable`, `JtSmartTable`, `JtForm`, `JtTooltip`, `JtDialog`
+> (promise-based), `JtSkeleton`. Every field supports `loading` (skeleton) and renders validation
+> errors below it.
 
 ---
 
@@ -171,8 +175,16 @@ const items = [
 </template>
 ```
 
-Props: `items`, `itemValue` (key or getter), `itemLabel` (key or getter), `searchable` (default
-`true`), `clearable`, `noDataText`, plus the shared field props. Slot `option` customizes rows.
+Props: `items`, `itemValue` (key or getter), `itemLabel` (key or getter), `multiple` (array model
+with chips), `searchable` (default `true`), `clearable`, `noDataText`, plus the shared field props.
+Slot `option` customizes rows.
+
+```vue
+<!-- Multiple selection — modelValue is an array -->
+<template>
+  <JtSelect v-model="tags" :items="options" multiple clearable />
+</template>
+```
 
 ### JtDatePicker
 
@@ -254,6 +266,103 @@ Everything `JtDataTable` does, plus inline **add / edit / delete** with per-colu
 
 Columns gain `rules` (validation while editing) and `editable` (default `true`). Props:
 `addable`, `editable`, `deletable` (all default `true`), plus the `JtDataTable` props.
+
+### JtCheckbox / JtSwitch
+
+Boolean inputs with the shared field behaviour (rules, error-below, `loading`).
+
+```vue
+<template>
+  <JtCheckbox v-model="accepted" label="I accept the terms" />
+  <JtSwitch v-model="notify" label="Enable notifications" />
+</template>
+```
+
+> For a "must be checked" rule use `(v) => v || 'message'` — the `required()` helper treats `false`
+> as a valid value.
+
+### JtRadioGroup
+
+Single choice from a list; `modelValue` can be **any type**, with configurable `itemValue`/`itemLabel`.
+
+```vue
+<template>
+  <JtRadioGroup
+    v-model="size"
+    label="Size"
+    :items="[{ label: 'S', value: 's' }, { label: 'M', value: 'm' }]"
+    direction="horizontal"
+    :rules="[required()]"
+  />
+</template>
+```
+
+### JtTooltip
+
+Floating tooltip shown on hover/focus (positioned with Floating UI).
+
+```vue
+<template>
+  <JtTooltip text="Delete permanently" placement="top">
+    <JtButton variant="text">🗑</JtButton>
+  </JtTooltip>
+</template>
+```
+
+### JtDialog (promise-based)
+
+Dialogs work like [`vue3-promise-dialog`](https://www.npmjs.com/package/vue3-promise-dialog):
+`openDialog()` returns a **promise** that resolves when the dialog closes.
+
+**1. Mount the provider once** near your app root:
+
+```vue
+<!-- App.vue -->
+<template>
+  <RouterView />
+  <JtDialogProvider />
+</template>
+```
+
+**2. Write a dialog component** that resolves via `useDialog().close(value)`:
+
+```vue
+<!-- ConfirmDialog.vue -->
+<script setup lang="ts">
+import { JtDialog, JtButton, useDialog } from '@james-tanuwidjaja/vue3-components';
+
+defineProps<{ message: string }>();
+const { close } = useDialog<boolean>();
+</script>
+
+<template>
+  <JtDialog title="Please confirm">
+    {{ message }}
+    <template #footer>
+      <JtButton variant="text" @click="close(false)">Cancel</JtButton>
+      <JtButton @click="close(true)">Confirm</JtButton>
+    </template>
+  </JtDialog>
+</template>
+```
+
+**3. Open it and await the result:**
+
+```ts
+import { openDialog } from '@james-tanuwidjaja/vue3-components';
+import ConfirmDialog from './ConfirmDialog.vue';
+
+const confirmed = await openDialog<boolean>(ConfirmDialog, { message: 'Delete this item?' });
+if (confirmed) {
+  /* ... */
+}
+```
+
+- `openDialog(component, props?, { persistent })` → `Promise<T>`. With `persistent: true`, backdrop
+  click and Escape won't close it.
+- Backdrop click / Escape / the header × resolve the promise with `undefined`.
+- `JtDialog` is a presentational shell (`title`, `hideClose`, `width`; slots `default`, `title`,
+  `footer`); you can also build fully custom dialog components.
 
 ### JtForm
 
@@ -406,10 +515,10 @@ push to `main` (set **Settings → Pages → Source: GitHub Actions**):
 
 ---
 
-## Roadmap (optional extras)
+## Roadmap
 
-Selection/utility components that can build on the same patterns: `JtCheckbox`, `JtRadioGroup`,
-`JtSwitch`, `JtDialog`/`JtModal`, `JtTooltip`, and multi-select support for `JtSelect`.
+The core set is complete. Possible future additions: a `JtMenu`/dropdown-menu, `JtTabs`,
+`JtSnackbar`/toast notifications, and a date-range mode for `JtDatePicker`.
 
 ## License
 
