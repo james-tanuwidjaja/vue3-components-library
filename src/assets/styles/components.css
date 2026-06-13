@@ -235,8 +235,10 @@
   /* ---------------------------------------------------------------- */
   /* Popover / dropdown panel                                         */
   /* ---------------------------------------------------------------- */
+  /* Must have a layout box so Floating UI can measure it (not display:contents). */
   .jt-popover__reference {
-    display: contents;
+    display: block;
+    width: 100%;
   }
 
   .jt-popover__panel {
@@ -536,6 +538,22 @@
   .jt-pagination__btn:disabled {
     opacity: 0.4;
     cursor: not-allowed;
+  }
+
+  .jt-pagination__btn--text {
+    width: auto;
+    padding: 0 0.5rem;
+  }
+
+  .jt-pagination__btn--active {
+    background: var(--color-jt-primary);
+    border-color: var(--color-jt-primary);
+    color: var(--color-jt-on-primary);
+  }
+
+  .jt-pagination__ellipsis {
+    padding: 0 0.125rem;
+    color: var(--color-jt-muted);
   }
 
   /* ---------------------------------------------------------------- */

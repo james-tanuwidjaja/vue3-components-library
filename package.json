@@ -1,6 +1,6 @@
 {
   "name": "@james-tanuwidjaja/vue3-components",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A reusable Vue 3 component library with a Vuetify-style createJt() plugin, precompiled CSS, and Storybook docs.",
   "type": "module",
   "license": "MIT",

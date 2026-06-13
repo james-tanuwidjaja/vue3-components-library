@@ -71,25 +71,7 @@
 
     <div v-if="pagination && !loading" class="jt-table__footer">
       <span class="jt-pagination">{{ rangeText }}</span>
-      <div class="jt-pagination">
-        <button
-          class="jt-pagination__btn"
-          :disabled="page <= 1"
-          aria-label="Previous page"
-          @click="page--"
-        >
-          &lsaquo;
-        </button>
-        <span>{{ Math.min(page, totalPages) }} / {{ totalPages }}</span>
-        <button
-          class="jt-pagination__btn"
-          :disabled="page >= totalPages"
-          aria-label="Next page"
-          @click="page++"
-        >
-          &rsaquo;
-        </button>
-      </div>
+      <JtTablePagination v-model="page" :total-pages="totalPages" />
     </div>
   </div>
 </template>
@@ -99,6 +81,7 @@ import { computed, toRef } from 'vue';
 
 import JtSkeleton from '../JtSkeleton/JtSkeleton.vue';
 import JtTableFilterCell from '../internal/JtTableFilterCell.vue';
+import JtTablePagination from '../internal/JtTablePagination.vue';
 import { useTableData } from '@/composables';
 import { formatCellValue } from '@/utils';
 import type { JtTableColumn } from '@/types';
@@ -153,7 +136,8 @@ const colspan = computed(() => columns.value.length + (slots.actions ? 1 : 0));
 const isSortable = (column: JtTableColumn): boolean => column.sortable !== false;
 
 function headerStyle(column: JtTableColumn) {
-  return { width: column.width, textAlign: column.align };
+  // Headers stay left-aligned even when cells are aligned otherwise.
+  return { width: column.width };
 }
 
 function sortIcon(key: string): string {
