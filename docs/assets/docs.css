@@ -298,3 +298,40 @@ a.jt-menu__link:hover {
   flex-wrap: wrap;
   gap: 0.5rem;
 }
+
+/* ------------------------------------------------------------------ */
+/* Color palette swatch (ThemingPage)                                 */
+/* ------------------------------------------------------------------ */
+.theme-palette {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 1rem 0 2rem;
+}
+
+.theme-swatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.375rem;
+  min-width: 5rem;
+}
+
+.theme-swatch__color {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: var(--radius-jt);
+  border: 1px solid var(--color-jt-border);
+}
+
+.theme-swatch__name {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-jt-on-surface);
+}
+
+.theme-swatch__value {
+  font-size: 0.6875rem;
+  color: var(--color-jt-muted);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+}

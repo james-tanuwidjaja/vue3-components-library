@@ -11,12 +11,14 @@
 import { computed } from 'vue';
 
 import { useDefaults } from '@/composables';
-import type { JtButtonVariant, JtSize } from '@/types';
+import type { JtButtonColor, JtButtonVariant, JtSize } from '@/types';
 
 const props = withDefaults(
   defineProps<{
     /** Visual style. */
     variant?: JtButtonVariant;
+    /** Semantic color. */
+    color?: JtButtonColor;
     /** Size. */
     size?: JtSize;
     /** Full-width button. */
@@ -30,6 +32,7 @@ const props = withDefaults(
   }>(),
   {
     variant: undefined,
+    color: undefined,
     size: undefined,
     block: false,
     loading: false,
@@ -42,6 +45,7 @@ const emit = defineEmits<{ click: [event: MouseEvent] }>();
 
 const pick = useDefaults('JtButton');
 const variant = computed(() => pick<JtButtonVariant>('variant', props.variant, 'filled'));
+const color = computed(() => pick<JtButtonColor>('color', props.color, 'primary'));
 const size = computed(() => pick<JtSize>('size', props.size, 'md'));
 
 const isDisabled = computed(() => props.disabled || props.loading);
@@ -49,6 +53,7 @@ const isDisabled = computed(() => props.disabled || props.loading);
 const classes = computed(() => [
   `jt-btn--${variant.value}`,
   `jt-btn--${size.value}`,
+  color.value !== 'primary' ? `jt-btn--${color.value}` : '',
   {
     'jt-btn--block': props.block,
     'jt-btn--disabled': isDisabled.value,

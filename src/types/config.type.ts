@@ -12,7 +12,20 @@ export interface JtThemeColors {
   muted?: string;
   error?: string;
   success?: string;
+  successHover?: string;
+  onSuccess?: string;
   warning?: string;
+  warningHover?: string;
+  onWarning?: string;
+  danger?: string;
+  dangerHover?: string;
+  onDanger?: string;
+  info?: string;
+  infoHover?: string;
+  onInfo?: string;
+  secondary?: string;
+  secondaryHover?: string;
+  onSecondary?: string;
 }
 
 export interface JtThemeOptions {

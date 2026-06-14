@@ -7,3 +7,5 @@ export type JtDensity = 'comfortable' | 'compact';
 export type JtTheme = 'light' | 'dark';
 
 export type JtButtonVariant = 'filled' | 'outlined' | 'text';
+
+export type JtButtonColor = 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info';

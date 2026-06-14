@@ -19,6 +19,7 @@ export const nav: DocNavSection[] = [
       { label: 'Introduction', to: '/', icon: 'mdi mdi-home-outline' },
       { label: 'Installation', to: '/installation', icon: 'mdi mdi-package-down' },
       { label: 'Theming', to: '/theming', icon: 'mdi mdi-palette-outline' },
+      { label: 'Changelog', to: '/changelog', icon: 'mdi mdi-history' },
     ],
   },
   {
@@ -79,6 +80,7 @@ export const routes: RouteRecordRaw[] = [
   { path: '/', component: () => import('./pages/HomePage.vue') },
   { path: '/installation', component: () => import('./pages/InstallationPage.vue') },
   { path: '/theming', component: () => import('./pages/ThemingPage.vue') },
+  { path: '/changelog', component: () => import('./pages/ChangelogPage.vue') },
   { path: '/guides/form', component: () => import('./pages/guides/FormPage.vue') },
   { path: '/guides/layout', component: () => import('./pages/guides/LayoutPage.vue') },
   { path: '/components/button', component: () => import('./pages/components/ButtonPage.vue') },

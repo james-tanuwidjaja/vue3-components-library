@@ -19,8 +19,26 @@
   --color-jt-muted: var(--jt-muted, #6b7280);
 
   --color-jt-error: var(--jt-error, #dc2626);
+
   --color-jt-success: var(--jt-success, #16a34a);
+  --color-jt-success-hover: var(--jt-success-hover, #15803d);
+  --color-jt-on-success: var(--jt-on-success, #ffffff);
+
   --color-jt-warning: var(--jt-warning, #d97706);
+  --color-jt-warning-hover: var(--jt-warning-hover, #b45309);
+  --color-jt-on-warning: var(--jt-on-warning, #ffffff);
+
+  --color-jt-danger: var(--jt-danger, #dc2626);
+  --color-jt-danger-hover: var(--jt-danger-hover, #b91c1c);
+  --color-jt-on-danger: var(--jt-on-danger, #ffffff);
+
+  --color-jt-info: var(--jt-info, #0891b2);
+  --color-jt-info-hover: var(--jt-info-hover, #0e7490);
+  --color-jt-on-info: var(--jt-on-info, #ffffff);
+
+  --color-jt-secondary: var(--jt-secondary, #6b7280);
+  --color-jt-secondary-hover: var(--jt-secondary-hover, #4b5563);
+  --color-jt-on-secondary: var(--jt-on-secondary, #ffffff);
 
   /* Radius */
   --radius-jt: var(--jt-radius, 0.5rem);

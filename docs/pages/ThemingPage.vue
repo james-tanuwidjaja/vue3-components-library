@@ -33,6 +33,24 @@
     </div>
     <DocCode :code="runtimeCode" lang="typescript" />
 
+    <h2>Color palette</h2>
+    <p>
+      All semantic colors are available as
+      <code>--color-jt-*</code>
+      CSS variables and as
+      <code>color</code>
+      prop values on
+      <code>JtButton</code>
+      .
+    </p>
+    <div class="theme-palette">
+      <div v-for="swatch in swatches" :key="swatch.name" class="theme-swatch">
+        <div class="theme-swatch__color" :style="{ background: swatch.value }" />
+        <span class="theme-swatch__name">{{ swatch.name }}</span>
+        <span class="theme-swatch__value">{{ swatch.value }}</span>
+      </div>
+    </div>
+
     <DocApiTable title="Color tokens" :rows="tokens" />
   </DocPage>
 </template>
@@ -72,6 +90,15 @@ document.documentElement.classList.toggle('jt-theme-dark');`;
 
 const runtimeCode = `document.documentElement.style.setProperty('--jt-primary', '#9333ea');`;
 
+const swatches = [
+  { name: 'primary', value: '#2563eb' },
+  { name: 'secondary', value: '#6b7280' },
+  { name: 'success', value: '#16a34a' },
+  { name: 'danger', value: '#dc2626' },
+  { name: 'warning', value: '#d97706' },
+  { name: 'info', value: '#0891b2' },
+];
+
 const tokens: ApiRow[] = [
   { name: 'primary', type: 'color', default: '#2563eb', description: 'Brand / primary color.' },
   { name: 'primaryHover', type: 'color', default: '#1d4ed8', description: 'Primary hover state.' },
@@ -81,8 +108,11 @@ const tokens: ApiRow[] = [
   { name: 'onSurface', type: 'color', default: '#1f2937', description: 'Text on surface.' },
   { name: 'border', type: 'color', default: '#d1d5db', description: 'Border color.' },
   { name: 'muted', type: 'color', default: '#6b7280', description: 'Muted text.' },
-  { name: 'error', type: 'color', default: '#dc2626', description: 'Error color.' },
-  { name: 'success', type: 'color', default: '#16a34a', description: 'Success color.' },
-  { name: 'warning', type: 'color', default: '#d97706', description: 'Warning color.' },
+  { name: 'error', type: 'color', default: '#dc2626', description: 'Validation error color.' },
+  { name: 'success / successHover / onSuccess', type: 'color', default: '#16a34a / #15803d / #fff', description: 'Success semantic color.' },
+  { name: 'warning / warningHover / onWarning', type: 'color', default: '#d97706 / #b45309 / #fff', description: 'Warning semantic color.' },
+  { name: 'danger / dangerHover / onDanger', type: 'color', default: '#dc2626 / #b91c1c / #fff', description: 'Danger UI intent (separate from validation error).' },
+  { name: 'info / infoHover / onInfo', type: 'color', default: '#0891b2 / #0e7490 / #fff', description: 'Info semantic color.' },
+  { name: 'secondary / secondaryHover / onSecondary', type: 'color', default: '#6b7280 / #4b5563 / #fff', description: 'Secondary / neutral color.' },
 ];
 </script>
