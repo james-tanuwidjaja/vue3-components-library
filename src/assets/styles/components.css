@@ -794,9 +794,21 @@
     grid-template-areas:
       'sidebar header'
       'sidebar main';
-    min-height: 100vh;
+    /* Pin to the viewport so the header/sidebar stay put and only the main area scrolls. */
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
     background: var(--color-jt-surface);
     color: var(--color-jt-on-surface);
+  }
+
+  /* Fixed footer: add a bottom row pinned below the scrolling main area. */
+  .jt-layout--footer-fixed {
+    grid-template-rows: var(--jt-header-height) 1fr auto;
+    grid-template-areas:
+      'sidebar header'
+      'sidebar main'
+      'sidebar footer';
   }
 
   .jt-layout__header {
@@ -811,6 +823,20 @@
     grid-area: main;
     overflow: auto;
     min-width: 0;
+    min-height: 0;
+  }
+
+  .jt-layout__footer--fixed {
+    grid-area: footer;
+  }
+
+  .jt-footer {
+    flex: none;
+    padding: 0.75rem 1.5rem;
+    border-top: 1px solid var(--color-jt-border);
+    background: var(--color-jt-surface);
+    color: var(--color-jt-muted);
+    font-size: 0.8125rem;
   }
 
   /* ---------------------------------------------------------------- */
@@ -961,6 +987,7 @@
 
   .jt-menu__link:hover {
     background: var(--color-jt-surface-muted);
+    text-decoration: none;
   }
 
   .jt-menu__link--active {

@@ -19,3 +19,4 @@ export { default as JtForm } from './JtForm/JtForm.vue';
 export { default as JtLayout } from './JtLayout/JtLayout.vue';
 export { default as JtHeader } from './JtHeader/JtHeader.vue';
 export { default as JtSidebar } from './JtSidebar/JtSidebar.vue';
+export { default as JtFooter } from './JtFooter/JtFooter.vue';

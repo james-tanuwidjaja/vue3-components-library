@@ -13,9 +13,9 @@ validation, skeleton loading on every field, and a self-built documentation site
 > **Components:** `JtButton`, `JtTextField`, `JtTextarea`, `JtNumberField`, `JtMoneyField`,
 > `JtSelect` (single + multiple), `JtCheckbox`, `JtSwitch`, `JtRadioGroup`, `JtDatePicker`,
 > `JtDateTimePicker`, `JtDataTable`, `JtSmartTable`, `JtForm`, `JtTooltip`, `JtDialog`
-> (promise-based), `JtSkeleton`, and layout primitives `JtLayout` / `JtHeader` / `JtSidebar`
-> (collapsible, permission-aware menu). Every field supports `loading` (skeleton) and renders
-> validation errors below it.
+> (promise-based), `JtSkeleton`, and layout primitives `JtLayout` / `JtHeader` / `JtSidebar` /
+> `JtFooter` (fixed shell, collapsible permission-aware menu). Every field supports `loading`
+> (skeleton) and renders validation errors below it.
 
 ---
 
@@ -490,9 +490,16 @@ const canAccess = (item: JtMenuItem) =>
 
     <!-- main content -->
     <RouterView />
+
+    <template #footer>
+      <JtFooter>© 2026 Acme · MIT</JtFooter>
+    </template>
   </JtLayout>
 </template>
 ```
+
+The shell is **pinned to the viewport**: the header and sidebar stay put, and only the main area
+scrolls. The sidebar's `#top`/`#bottom` stay fixed too — only its menu scrolls when it's long.
 
 **Sidebar** has three sections: `#top` (optional — logo), the **menu** (from `items`, or the default
 slot for custom content), and `#bottom` (optional — version/copyright).
@@ -509,6 +516,9 @@ slot for custom content), and `#bottom` (optional — version/copyright).
   fields you need (`roles`, `permission`, …) on the item and read them in the predicate.
 - **Minimize:** collapsed shows **icons only (rail)**; with `expandOnHover`, hovering the rail
   expands it over the content to reveal labels. Active item via `currentPath` (matches `to`/`href`).
+
+**Footer:** provide a `#footer` slot (e.g. with `JtFooter`). By default it flows after the content
+and scrolls with it; set `fixed-footer` on `JtLayout` to pin it to the bottom of the viewport.
 
 `JtHeader` and `JtSidebar` also work **standalone** (outside `JtLayout`): each takes a
 `collapsed` `v-model`. Layout sizing is tokenized: `--jt-header-height`, `--jt-sidebar-width`,
