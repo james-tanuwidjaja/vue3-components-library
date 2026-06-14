@@ -3,6 +3,7 @@ import type { RouteRecordRaw } from 'vue-router';
 export interface DocNavItem {
   label: string;
   to: string;
+  icon: string;
 }
 
 export interface DocNavSection {
@@ -15,57 +16,57 @@ export const nav: DocNavSection[] = [
   {
     title: 'Getting started',
     items: [
-      { label: 'Introduction', to: '/' },
-      { label: 'Installation', to: '/installation' },
-      { label: 'Theming', to: '/theming' },
+      { label: 'Introduction', to: '/', icon: '🏠' },
+      { label: 'Installation', to: '/installation', icon: '📦' },
+      { label: 'Theming', to: '/theming', icon: '🎨' },
     ],
   },
   {
     title: 'Guides',
     items: [
-      { label: 'Forms', to: '/guides/form' },
-      { label: 'Layout', to: '/guides/layout' },
+      { label: 'Forms', to: '/guides/form', icon: '📝' },
+      { label: 'Layout', to: '/guides/layout', icon: '🧱' },
     ],
   },
   {
     title: 'Form inputs',
     items: [
-      { label: 'Button', to: '/components/button' },
-      { label: 'Text Field', to: '/components/text-field' },
-      { label: 'Textarea', to: '/components/textarea' },
-      { label: 'Number Field', to: '/components/number-field' },
-      { label: 'Money Field', to: '/components/money-field' },
-      { label: 'Select', to: '/components/select' },
+      { label: 'Button', to: '/components/button', icon: '🔘' },
+      { label: 'Text Field', to: '/components/text-field', icon: '✏️' },
+      { label: 'Textarea', to: '/components/textarea', icon: '📄' },
+      { label: 'Number Field', to: '/components/number-field', icon: '🔢' },
+      { label: 'Money Field', to: '/components/money-field', icon: '💰' },
+      { label: 'Select', to: '/components/select', icon: '🔽' },
     ],
   },
   {
     title: 'Selection controls',
     items: [
-      { label: 'Checkbox', to: '/components/checkbox' },
-      { label: 'Switch', to: '/components/switch' },
-      { label: 'Radio Group', to: '/components/radio-group' },
+      { label: 'Checkbox', to: '/components/checkbox', icon: '☑️' },
+      { label: 'Switch', to: '/components/switch', icon: '🎚️' },
+      { label: 'Radio Group', to: '/components/radio-group', icon: '🔘' },
     ],
   },
   {
     title: 'Pickers',
     items: [
-      { label: 'Date Picker', to: '/components/date-picker' },
-      { label: 'Date Time Picker', to: '/components/date-time-picker' },
+      { label: 'Date Picker', to: '/components/date-picker', icon: '📅' },
+      { label: 'Date Time Picker', to: '/components/date-time-picker', icon: '🕐' },
     ],
   },
   {
     title: 'Data',
     items: [
-      { label: 'Data Table', to: '/components/data-table' },
-      { label: 'Smart Table', to: '/components/smart-table' },
+      { label: 'Data Table', to: '/components/data-table', icon: '📊' },
+      { label: 'Smart Table', to: '/components/smart-table', icon: '🧮' },
     ],
   },
   {
     title: 'Feedback',
     items: [
-      { label: 'Dialog', to: '/components/dialog' },
-      { label: 'Tooltip', to: '/components/tooltip' },
-      { label: 'Skeleton', to: '/components/skeleton' },
+      { label: 'Dialog', to: '/components/dialog', icon: '💬' },
+      { label: 'Tooltip', to: '/components/tooltip', icon: '💡' },
+      { label: 'Skeleton', to: '/components/skeleton', icon: '💀' },
     ],
   },
 ];

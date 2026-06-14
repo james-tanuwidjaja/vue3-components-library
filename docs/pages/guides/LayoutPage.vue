@@ -61,12 +61,10 @@ import DocCode from '../../components/DocCode.vue';
 import DocApiTable from '../../components/DocApiTable.vue';
 import type { ApiRow } from '../../types';
 
-const shellCode = `<JtLayout v-model:collapsed="collapsed" :expand-on-hover="true">
+const shellCode = `<!-- Pinned shell: header + sidebar stay put, only the main area scrolls. -->
+<JtLayout v-model:collapsed="collapsed" :expand-on-hover="true">
   <template #header>
-    <JtHeader>
-      <template #brand><img src="/logo.svg" /></template>
-      <template #submark><img src="/mark.svg" /></template>
-    </JtHeader>
+    <JtHeader />
   </template>
 
   <template #sidebar>
@@ -82,6 +80,11 @@ const shellCode = `<JtLayout v-model:collapsed="collapsed" :expand-on-hover="tru
   </template>
 
   <RouterView />
+
+  <!-- Static by default; add \`fixed-footer\` on JtLayout to pin it. -->
+  <template #footer>
+    <JtFooter>© 2026 Acme · MIT</JtFooter>
+  </template>
 </JtLayout>`;
 
 const itemsCode = `const items: JtMenuItem[] = [

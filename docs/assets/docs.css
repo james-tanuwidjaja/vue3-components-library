@@ -287,3 +287,11 @@ a:hover {
   gap: 0.75rem;
   max-width: 22rem;
 }
+
+.doc-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
