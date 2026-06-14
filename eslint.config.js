@@ -2,7 +2,6 @@ import { globalIgnores } from 'eslint/config';
 import pluginVue from 'eslint-plugin-vue';
 import { defineConfigWithVueTs, vueTsConfigs } from '@vue/eslint-config-typescript';
 import skipFormatting from '@vue/eslint-config-prettier/skip-formatting';
-import storybook from 'eslint-plugin-storybook';
 
 export default defineConfigWithVueTs(
   {
@@ -10,11 +9,10 @@ export default defineConfigWithVueTs(
     files: ['**/*.{ts,mts,tsx,vue}'],
   },
 
-  globalIgnores(['**/dist/**', '**/storybook-static/**', '**/coverage/**']),
+  globalIgnores(['**/dist/**', '**/dist-docs/**', '**/coverage/**']),
 
   pluginVue.configs['flat/recommended'],
   vueTsConfigs.recommended,
-  storybook.configs['flat/recommended'],
 
   {
     name: 'app/rules',

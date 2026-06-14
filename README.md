@@ -2,13 +2,13 @@
 
 A reusable **Vue 3** component library with a Vuetify-style `createJt()` plugin, precompiled
 CSS (no Tailwind setup required downstream), configurable theming/locale, built-in form
-validation, skeleton loading on every field, and Storybook docs.
+validation, skeleton loading on every field, and a self-built documentation site.
 
 - **Stack:** Vue 3.5 · Vite 8 · TypeScript 6 · Tailwind v4 (precompiled) · date-fns v4
 - **Install once, use everywhere:** `app.use(createJt({ ... }))`
 - **Tree-shakeable:** import components individually, or register them all via the plugin
 
-📖 **[Live Storybook & component playground →](https://james-tanuwidjaja.github.io/vue3-components-library/)**
+📖 **[Documentation & live examples →](https://james-tanuwidjaja.github.io/vue3-components-library/)**
 
 > **Components:** `JtButton`, `JtTextField`, `JtTextarea`, `JtNumberField`, `JtMoneyField`,
 > `JtSelect` (single + multiple), `JtCheckbox`, `JtSwitch`, `JtRadioGroup`, `JtDatePicker`,
@@ -592,19 +592,19 @@ src/
 
 ```bash
 npm install
-npm run dev            # Vite dev server
-npm run storybook      # Storybook at http://localhost:6006
+npm run docs:dev       # run the documentation site (also `npm run dev`)
+npm run docs:build     # build the docs site -> dist-docs/
 npm run build          # build the library (dist/) + types + CSS
-npm run build-storybook
 npm run lint
 npm run format
 npm run typecheck
 npm run test
 ```
 
-Storybook is deployed to GitHub Pages via `.github/workflows/deploy-storybook.yml` on every
-push to `main` (set **Settings → Pages → Source: GitHub Actions**):
-<https://james-tanuwidjaja.github.io/vue3-components-library/>
+The documentation is a **self-built site** (in [docs/](docs/)) that uses the library's own
+components, with live examples + source. It is deployed to GitHub Pages via
+`.github/workflows/deploy-docs.yml` on every push to `main` (set **Settings → Pages → Source:
+GitHub Actions**): <https://james-tanuwidjaja.github.io/vue3-components-library/>
 
 ---
 
