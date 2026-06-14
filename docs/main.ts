@@ -4,6 +4,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import { createJt } from '@james-tanuwidjaja/vue3-components';
 import '@james-tanuwidjaja/vue3-components/styles';
 import 'highlight.js/styles/github-dark.css';
+import '@mdi/font/css/materialdesignicons.min.css';
 import './assets/docs.css';
 
 import App from './App.vue';
