@@ -1,7 +1,7 @@
 // Styles are imported so the library build emits a single precompiled CSS file.
 import './assets/styles/index.css';
 
-// Plugin factory (Vuetify-style install).
+// Plugin factory (createJt install).
 export { createJt } from './plugin';
 export type { JtInstance } from './plugin/create-jt';
 

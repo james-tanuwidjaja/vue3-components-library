@@ -34,7 +34,7 @@ export interface JtMoneyOptions {
 }
 
 export interface JtLocaleOptions {
-  /** Default display date format (moment-style tokens). Defaults to `'DD/MM/YYYY'`. */
+  /** Default display date format (date tokens, e.g. `DD/MM/YYYY`). Defaults to `'DD/MM/YYYY'`. */
   dateFormat?: string;
   /** Default datetime display format. Defaults to `'DD/MM/YYYY HH:mm'`. */
   dateTimeFormat?: string;

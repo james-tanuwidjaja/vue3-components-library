@@ -38,17 +38,19 @@
     "node": ">=24"
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --config vite.docs.config.ts",
     "build": "vue-tsc --noEmit && vite build",
     "typecheck": "vue-tsc --noEmit",
+    "typecheck:docs": "vue-tsc --noEmit -p docs/tsconfig.json",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "format": "prettier --write \"src/**/*.{ts,vue,css,json,md}\"",
-    "format:check": "prettier --check \"src/**/*.{ts,vue,css,json,md}\"",
+    "format": "prettier --write \"{src,docs}/**/*.{ts,vue,css,json,md}\"",
+    "format:check": "prettier --check \"{src,docs}/**/*.{ts,vue,css,json,md}\"",
     "test": "vitest run",
     "test:watch": "vitest",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "docs:dev": "vite --config vite.docs.config.ts",
+    "docs:build": "vite build --config vite.docs.config.ts",
+    "docs:preview": "vite preview --config vite.docs.config.ts"
   },
   "peerDependencies": {
     "vue": "^3.5.0"
@@ -58,21 +60,20 @@
     "date-fns": "^4.1.0"
   },
   "devDependencies": {
-    "@storybook/vue3-vite": "^10.4.4",
     "@tailwindcss/vite": "^4.3.1",
     "@types/node": "^25.9.3",
     "@vitejs/plugin-vue": "^6.0.7",
     "@vitest/coverage-v8": "^4.1.8",
     "@vue/eslint-config-prettier": "^10.2.0",
     "@vue/eslint-config-typescript": "^14.8.0",
+    "@vue/language-core": "^3.3.5",
     "@vue/test-utils": "^2.4.11",
     "eslint": "^10.5.0",
-    "eslint-plugin-storybook": "^10.4.4",
     "eslint-plugin-vue": "^10.9.2",
+    "highlight.js": "^11.11.1",
     "jsdom": "^29.1.1",
     "prettier": "^3.8.4",
     "prettier-plugin-tailwindcss": "^0.8.0",
-    "storybook": "^10.4.4",
     "tailwindcss": "^4.3.1",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.61.0",
@@ -81,6 +82,7 @@
     "vitest": "^4.1.8",
     "vue": "^3.5.38",
     "vue-eslint-parser": "^10.4.1",
+    "vue-router": "^5.1.0",
     "vue-tsc": "^3.3.5"
   }
 }

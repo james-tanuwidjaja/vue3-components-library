@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "types": ["node"],
+    "skipLibCheck": true,
+    "jsx": "preserve",
+    "noEmit": true,
+    "strict": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+
+    // Mirror the Vite aliases in vite.docs.config.ts so the editor resolves the
+    // library to its source (always up to date) instead of the built dist.
+    "paths": {
+      "@james-tanuwidjaja/vue3-components": ["../src/index.ts"],
+      "@docs/*": ["./*"],
+      "@/*": ["../src/*"]
+    }
+  },
+  "include": ["**/*.ts", "**/*.vue", "env.d.ts"]
+}
