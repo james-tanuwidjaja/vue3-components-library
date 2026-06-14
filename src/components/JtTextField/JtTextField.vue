@@ -47,7 +47,7 @@ const props = withDefaults(
     /** Field name (keys the value in an enclosing form). */
     name?: string;
     /** Validation rules. */
-    rules?: ValidationRule<string | null>[];
+    rules?: ValidationRule<string>[];
     /** Externally-supplied error message. */
     errorMessages?: string;
     /** Show the required indicator on the label. */

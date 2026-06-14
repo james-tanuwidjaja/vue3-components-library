@@ -9,7 +9,7 @@ describe('toDateFnsPattern', () => {
 });
 
 describe('formatDate', () => {
-  it('formats with moment-style tokens', () => {
+  it('formats with the library date tokens', () => {
     expect(formatDate(new Date(2024, 0, 5), 'DD/MM/YYYY')).toBe('05/01/2024');
   });
 

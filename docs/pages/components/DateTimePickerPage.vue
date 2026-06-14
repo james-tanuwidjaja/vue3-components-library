@@ -29,7 +29,7 @@ const apiProps: ApiRow[] = [
     name: 'displayFormat',
     type: 'string',
     default: "'DD/MM/YYYY HH:mm'",
-    description: 'Display format (moment-style).',
+    description: 'Display format (date/time tokens).',
   },
   { name: 'min', type: 'Date | string', description: 'Earliest selectable date.' },
   { name: 'max', type: 'Date | string', description: 'Latest selectable date.' },

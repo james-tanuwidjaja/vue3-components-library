@@ -97,7 +97,7 @@ const props = withDefaults(
   defineProps<{
     /** Bound value (a `Date`, or `null`). */
     modelValue?: Date | null;
-    /** Display format (moment-style). Defaults to the plugin locale dateTimeFormat. */
+    /** Display format (date/time tokens). Defaults to the plugin locale dateTimeFormat. */
     displayFormat?: string;
     min?: Date | string;
     max?: Date | string;

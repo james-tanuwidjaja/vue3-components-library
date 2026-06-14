@@ -14,7 +14,7 @@
       :component="CustomCells"
       :source="CustomCellsSrc"
       title="Custom cells & actions"
-      description="A slot named after a column key customizes its cell (vue-good-table-next style); the actions slot adds a trailing column."
+      description="A slot named after a column key customizes its cell; the actions slot adds a trailing column."
     />
     <DocApiTable title="Props" :rows="apiProps" />
     <DocApiTable title="Column (JtTableColumn)" :rows="apiColumn" />

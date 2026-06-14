@@ -3,7 +3,7 @@
     <section class="doc-hero">
       <h1 class="doc-hero__title">Jt Components</h1>
       <p class="doc-hero__lead">
-        A reusable Vue 3 component library with a Vuetify-style
+        A reusable Vue 3 component library with a single
         <code>createJt()</code>
         plugin, precompiled CSS, configurable theming, built-in form validation, data tables, and
         layout primitives.
@@ -20,7 +20,7 @@
         <p>
           Register everything with
           <code>app.use(createJt())</code>
-          — Vuetify-style.
+          in your app entry.
         </p>
       </div>
       <div class="doc-feature">

@@ -72,7 +72,7 @@ const props = withDefaults(
     modelValue?: string | null;
     /** Secondary value: the formatted display string (e.g. `DD/MM/YYYY`). */
     formatted?: string;
-    /** Display format (moment-style tokens). Defaults to the plugin locale. */
+    /** Display format (date tokens, e.g. `DD/MM/YYYY`). Defaults to the plugin locale. */
     displayFormat?: string;
     min?: Date | string;
     max?: Date | string;

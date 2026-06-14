@@ -60,7 +60,7 @@ export const pattern =
   (value) =>
     isEmpty(value) || re.test(String(value)) || message;
 
-/** Convenience namespace mirroring Vuetify-style rule access (`rules.required()`). */
+/** Convenience namespace for rule access (`rules.required()`). */
 export const rules = {
   required,
   minLength,

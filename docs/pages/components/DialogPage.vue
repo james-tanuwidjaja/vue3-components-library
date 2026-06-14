@@ -11,9 +11,7 @@
       <code>openDialog()</code>
       and resolve it via
       <code>useDialog().close(value)</code>
-      . Unlike
-      <code>vue3-promise-dialog</code>
-      , dialogs can be
+      . Dialogs can also be
       <strong>stacked</strong>
       (opened from within another dialog).
     </p>

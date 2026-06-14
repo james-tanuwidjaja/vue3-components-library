@@ -1,6 +1,6 @@
 # @james-tanuwidjaja/vue3-components
 
-A reusable **Vue 3** component library with a Vuetify-style `createJt()` plugin, precompiled
+A reusable **Vue 3** component library with a single `createJt()` plugin, precompiled
 CSS (no Tailwind setup required downstream), configurable theming/locale, built-in form
 validation, skeleton loading on every field, and a self-built documentation site.
 
@@ -27,7 +27,7 @@ npm install @james-tanuwidjaja/vue3-components
 
 Peer dependency: `vue@^3.5`.
 
-## Setup (Vuetify-style)
+## Setup
 
 ```ts
 // main.ts
@@ -149,7 +149,7 @@ Separators default to the plugin locale (`.` thousands / `,` decimal) and are ov
 
 ### JtSelect
 
-Searchable dropdown (type to filter, like Vuetify autocomplete). The selected `value` can be **any
+Searchable dropdown (type to filter, autocomplete-style). The selected `value` can be **any
 type** — string, number, boolean, or object — and the value/label keys are configurable.
 
 ```vue
@@ -237,7 +237,7 @@ const columns: JtTableColumn[] = [
 
 <template>
   <JtDataTable :columns="columns" :items="rows" :page-size="10">
-    <!-- Custom cell via a slot named after the column key (vue-good-table-next style) -->
+    <!-- Custom cell via a slot named after the column key -->
     <template #name="{ row, value }"><strong>{{ value }}</strong></template>
     <template #active="{ value }">{{ value ? '✅' : '—' }}</template>
     <template #actions="{ row }">
@@ -316,8 +316,8 @@ Floating tooltip shown on hover/focus (positioned with Floating UI).
 
 ### JtDialog (promise-based)
 
-Dialogs work like [`vue3-promise-dialog`](https://www.npmjs.com/package/vue3-promise-dialog):
-`openDialog()` returns a **promise** that resolves when the dialog closes.
+Dialogs are **promise-based**: `openDialog()` returns a **promise** that resolves when the dialog
+closes.
 
 **1. Mount the provider once** near your app root:
 
@@ -366,7 +366,7 @@ if (confirmed) {
 - `openDialog(component, props?, { persistent })` → `Promise<T>`. With `persistent: true`, backdrop
   click and Escape won't close it.
 - Backdrop click / Escape / the header × resolve the promise with `undefined`.
-- **Stacked dialogs (modal-on-modal):** unlike `vue3-promise-dialog`, you can `await openDialog(...)`
+- **Stacked dialogs (modal-on-modal):** you can `await openDialog(...)`
   from *inside* another dialog — each is rendered on its own overlay, resolves independently, and
   Escape closes only the topmost one.
 - `JtDialog` is a presentational shell (`title`, `hideClose`, `width`; slots `default`, `title`,

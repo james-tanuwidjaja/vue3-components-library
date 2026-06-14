@@ -39,7 +39,7 @@ const props = withDefaults(
     hint?: string;
     name?: string;
     rows?: number;
-    rules?: ValidationRule<string | null>[];
+    rules?: ValidationRule<string>[];
     errorMessages?: string;
     required?: boolean;
     loading?: boolean;

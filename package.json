@@ -41,6 +41,7 @@
     "dev": "vite --config vite.docs.config.ts",
     "build": "vue-tsc --noEmit && vite build",
     "typecheck": "vue-tsc --noEmit",
+    "typecheck:docs": "vue-tsc --noEmit -p docs/tsconfig.json",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write \"{src,docs}/**/*.{ts,vue,css,json,md}\"",
