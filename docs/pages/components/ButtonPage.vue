@@ -12,6 +12,12 @@
       title="Loading"
       description="A loading button shows a spinner and blocks clicks."
     />
+    <DocExample
+      :component="Colors"
+      :source="ColorsSrc"
+      title="Colors"
+      description="The color prop sets the semantic color. Composable with any variant."
+    />
     <DocApiTable title="Props" :rows="apiProps" />
   </DocPage>
 </template>
@@ -28,6 +34,8 @@ import Sizes from '../../examples/button/Sizes.vue';
 import SizesSrc from '../../examples/button/Sizes.vue?raw';
 import Loading from '../../examples/button/Loading.vue';
 import LoadingSrc from '../../examples/button/Loading.vue?raw';
+import Colors from '../../examples/button/Colors.vue';
+import ColorsSrc from '../../examples/button/Colors.vue?raw';
 
 const apiProps: ApiRow[] = [
   {
@@ -35,6 +43,12 @@ const apiProps: ApiRow[] = [
     type: "'filled' | 'outlined' | 'text'",
     default: "'filled'",
     description: 'Visual style.',
+  },
+  {
+    name: 'color',
+    type: "'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info'",
+    default: "'primary'",
+    description: 'Semantic color. Composable with any variant.',
   },
   { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'", description: 'Button size.' },
   { name: 'block', type: 'boolean', default: 'false', description: 'Full-width button.' },

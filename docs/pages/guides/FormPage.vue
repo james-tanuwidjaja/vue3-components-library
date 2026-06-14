@@ -24,6 +24,13 @@
       title="Create form with validation & dirty detection"
     />
 
+    <DocExample
+      :component="EditFormDemo"
+      :source="EditFormDemoSrc"
+      title="Edit form (load data + dirty check)"
+      description="Fetch data first, then anchor the form's initial state — isDirty only becomes true after the user changes something. Save re-anchors the baseline so dirty resets after a successful submit."
+    />
+
     <h2>Validation rules</h2>
     <p>
       Rule factories return
@@ -46,6 +53,9 @@ import type { ApiRow } from '../../types';
 
 import FormDemo from '../../examples/form/FormDemo.vue';
 import FormDemoSrc from '../../examples/form/FormDemo.vue?raw';
+
+import EditFormDemo from '../../examples/form/EditFormDemo.vue';
+import EditFormDemoSrc from '../../examples/form/EditFormDemo.vue?raw';
 
 const rulesCode = `import { required, minLength, email, numeric, min } from '@james-tanuwidjaja/vue3-components';
 

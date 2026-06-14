@@ -1,5 +1,5 @@
 <template>
-  <JtLayout v-model:collapsed="collapsed" :expand-on-hover="true">
+  <JtLayout v-model:collapsed="collapsed" :expand-on-hover="true" fixed-footer>
     <template #header>
       <JtHeader>
         <template #actions>
@@ -62,7 +62,7 @@ import GithubIcon from './components/GithubIcon.vue';
 import { nav } from './router';
 
 const repoUrl = 'https://github.com/james-tanuwidjaja/vue3-components-library';
-const version = '0.6.0';
+const version = '0.7.0';
 const year = new Date().getFullYear();
 
 const route = useRoute();

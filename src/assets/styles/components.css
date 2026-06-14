@@ -157,11 +157,18 @@
       border-color 0.15s ease,
       opacity 0.15s ease;
     user-select: none;
+    /* Internal color vars — default to primary; color modifier classes override these. */
+    --_btn-bg: var(--color-jt-primary);
+    --_btn-bg-hover: var(--color-jt-primary-hover);
+    --_btn-fg: var(--color-jt-on-primary);
+    --_btn-accent: var(--color-jt-primary);
+    --_btn-accent-bg: color-mix(in srgb, var(--color-jt-primary) 10%, transparent);
+    --_btn-ring: color-mix(in srgb, var(--color-jt-primary) 35%, transparent);
   }
 
   .jt-btn:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-jt-primary) 35%, transparent);
+    box-shadow: 0 0 0 3px var(--_btn-ring);
   }
 
   .jt-btn--md {
@@ -184,37 +191,83 @@
   }
 
   .jt-btn--filled {
-    background-color: var(--color-jt-primary);
-    color: var(--color-jt-on-primary);
+    background-color: var(--_btn-bg);
+    color: var(--_btn-fg);
   }
 
   .jt-btn--filled:hover:not(:disabled) {
-    background-color: var(--color-jt-primary-hover);
+    background-color: var(--_btn-bg-hover);
   }
 
   .jt-btn--outlined {
     background-color: transparent;
-    color: var(--color-jt-primary);
-    border-color: var(--color-jt-primary);
+    color: var(--_btn-accent);
+    border-color: var(--_btn-accent);
   }
 
   .jt-btn--outlined:hover:not(:disabled) {
-    background-color: color-mix(in srgb, var(--color-jt-primary) 10%, transparent);
+    background-color: var(--_btn-accent-bg);
   }
 
   .jt-btn--text {
     background-color: transparent;
-    color: var(--color-jt-primary);
+    color: var(--_btn-accent);
   }
 
   .jt-btn--text:hover:not(:disabled) {
-    background-color: color-mix(in srgb, var(--color-jt-primary) 10%, transparent);
+    background-color: var(--_btn-accent-bg);
   }
 
   .jt-btn:disabled,
   .jt-btn--disabled {
     opacity: 0.55;
     cursor: not-allowed;
+  }
+
+  /* Color modifier classes — each overrides the internal --_btn-* vars. */
+  .jt-btn--secondary {
+    --_btn-bg: var(--color-jt-secondary);
+    --_btn-bg-hover: var(--color-jt-secondary-hover);
+    --_btn-fg: var(--color-jt-on-secondary);
+    --_btn-accent: var(--color-jt-secondary);
+    --_btn-accent-bg: color-mix(in srgb, var(--color-jt-secondary) 10%, transparent);
+    --_btn-ring: color-mix(in srgb, var(--color-jt-secondary) 35%, transparent);
+  }
+
+  .jt-btn--success {
+    --_btn-bg: var(--color-jt-success);
+    --_btn-bg-hover: var(--color-jt-success-hover);
+    --_btn-fg: var(--color-jt-on-success);
+    --_btn-accent: var(--color-jt-success);
+    --_btn-accent-bg: color-mix(in srgb, var(--color-jt-success) 10%, transparent);
+    --_btn-ring: color-mix(in srgb, var(--color-jt-success) 35%, transparent);
+  }
+
+  .jt-btn--danger {
+    --_btn-bg: var(--color-jt-danger);
+    --_btn-bg-hover: var(--color-jt-danger-hover);
+    --_btn-fg: var(--color-jt-on-danger);
+    --_btn-accent: var(--color-jt-danger);
+    --_btn-accent-bg: color-mix(in srgb, var(--color-jt-danger) 10%, transparent);
+    --_btn-ring: color-mix(in srgb, var(--color-jt-danger) 35%, transparent);
+  }
+
+  .jt-btn--warning {
+    --_btn-bg: var(--color-jt-warning);
+    --_btn-bg-hover: var(--color-jt-warning-hover);
+    --_btn-fg: var(--color-jt-on-warning);
+    --_btn-accent: var(--color-jt-warning);
+    --_btn-accent-bg: color-mix(in srgb, var(--color-jt-warning) 10%, transparent);
+    --_btn-ring: color-mix(in srgb, var(--color-jt-warning) 35%, transparent);
+  }
+
+  .jt-btn--info {
+    --_btn-bg: var(--color-jt-info);
+    --_btn-bg-hover: var(--color-jt-info-hover);
+    --_btn-fg: var(--color-jt-on-info);
+    --_btn-accent: var(--color-jt-info);
+    --_btn-accent-bg: color-mix(in srgb, var(--color-jt-info) 10%, transparent);
+    --_btn-ring: color-mix(in srgb, var(--color-jt-info) 35%, transparent);
   }
 
   .jt-spinner {
