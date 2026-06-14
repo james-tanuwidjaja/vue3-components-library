@@ -16,57 +16,61 @@ export const nav: DocNavSection[] = [
   {
     title: 'Getting started',
     items: [
-      { label: 'Introduction', to: '/', icon: '🏠' },
-      { label: 'Installation', to: '/installation', icon: '📦' },
-      { label: 'Theming', to: '/theming', icon: '🎨' },
+      { label: 'Introduction', to: '/', icon: 'mdi mdi-home-outline' },
+      { label: 'Installation', to: '/installation', icon: 'mdi mdi-package-down' },
+      { label: 'Theming', to: '/theming', icon: 'mdi mdi-palette-outline' },
     ],
   },
   {
     title: 'Guides',
     items: [
-      { label: 'Forms', to: '/guides/form', icon: '📝' },
-      { label: 'Layout', to: '/guides/layout', icon: '🧱' },
+      { label: 'Forms', to: '/guides/form', icon: 'mdi mdi-form-textbox' },
+      { label: 'Layout', to: '/guides/layout', icon: 'mdi mdi-view-dashboard-outline' },
     ],
   },
   {
     title: 'Form inputs',
     items: [
-      { label: 'Button', to: '/components/button', icon: '🔘' },
-      { label: 'Text Field', to: '/components/text-field', icon: '✏️' },
-      { label: 'Textarea', to: '/components/textarea', icon: '📄' },
-      { label: 'Number Field', to: '/components/number-field', icon: '🔢' },
-      { label: 'Money Field', to: '/components/money-field', icon: '💰' },
-      { label: 'Select', to: '/components/select', icon: '🔽' },
+      { label: 'Button', to: '/components/button', icon: 'mdi mdi-gesture-tap-button' },
+      { label: 'Text Field', to: '/components/text-field', icon: 'mdi mdi-form-textbox' },
+      { label: 'Textarea', to: '/components/textarea', icon: 'mdi mdi-text-box-outline' },
+      { label: 'Number Field', to: '/components/number-field', icon: 'mdi mdi-numeric' },
+      { label: 'Money Field', to: '/components/money-field', icon: 'mdi mdi-currency-usd' },
+      { label: 'Select', to: '/components/select', icon: 'mdi mdi-menu-down-outline' },
     ],
   },
   {
     title: 'Selection controls',
     items: [
-      { label: 'Checkbox', to: '/components/checkbox', icon: '☑️' },
-      { label: 'Switch', to: '/components/switch', icon: '🎚️' },
-      { label: 'Radio Group', to: '/components/radio-group', icon: '🔘' },
+      { label: 'Checkbox', to: '/components/checkbox', icon: 'mdi mdi-checkbox-marked-outline' },
+      { label: 'Switch', to: '/components/switch', icon: 'mdi mdi-toggle-switch-outline' },
+      { label: 'Radio Group', to: '/components/radio-group', icon: 'mdi mdi-radiobox-marked' },
     ],
   },
   {
     title: 'Pickers',
     items: [
-      { label: 'Date Picker', to: '/components/date-picker', icon: '📅' },
-      { label: 'Date Time Picker', to: '/components/date-time-picker', icon: '🕐' },
+      { label: 'Date Picker', to: '/components/date-picker', icon: 'mdi mdi-calendar-outline' },
+      {
+        label: 'Date Time Picker',
+        to: '/components/date-time-picker',
+        icon: 'mdi mdi-calendar-clock-outline',
+      },
     ],
   },
   {
     title: 'Data',
     items: [
-      { label: 'Data Table', to: '/components/data-table', icon: '📊' },
-      { label: 'Smart Table', to: '/components/smart-table', icon: '🧮' },
+      { label: 'Data Table', to: '/components/data-table', icon: 'mdi mdi-table-large' },
+      { label: 'Smart Table', to: '/components/smart-table', icon: 'mdi mdi-table-edit' },
     ],
   },
   {
     title: 'Feedback',
     items: [
-      { label: 'Dialog', to: '/components/dialog', icon: '💬' },
-      { label: 'Tooltip', to: '/components/tooltip', icon: '💡' },
-      { label: 'Skeleton', to: '/components/skeleton', icon: '💀' },
+      { label: 'Dialog', to: '/components/dialog', icon: 'mdi mdi-message-text-outline' },
+      { label: 'Tooltip', to: '/components/tooltip', icon: 'mdi mdi-tooltip-text-outline' },
+      { label: 'Skeleton', to: '/components/skeleton', icon: 'mdi mdi-image-outline' },
     ],
   },
 ];

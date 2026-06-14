@@ -30,7 +30,6 @@
         <template #top>
           <RouterLink to="/" class="doc-brand">{{ collapsed ? 'Jt' : 'Jt Components' }}</RouterLink>
         </template>
-        <template #icon="{ item }">{{ item.icon }}</template>
         <template #bottom>
           <a :href="repoUrl" target="_blank" rel="noopener">GitHub ↗</a>
         </template>
