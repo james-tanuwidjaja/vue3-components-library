@@ -28,13 +28,44 @@ export const nav: DocNavSection[] = [
     ],
   },
   {
-    title: 'Components',
+    title: 'Form inputs',
     items: [
       { label: 'Button', to: '/components/button' },
       { label: 'Text Field', to: '/components/text-field' },
+      { label: 'Textarea', to: '/components/textarea' },
+      { label: 'Number Field', to: '/components/number-field' },
+      { label: 'Money Field', to: '/components/money-field' },
       { label: 'Select', to: '/components/select' },
+    ],
+  },
+  {
+    title: 'Selection controls',
+    items: [
+      { label: 'Checkbox', to: '/components/checkbox' },
+      { label: 'Switch', to: '/components/switch' },
+      { label: 'Radio Group', to: '/components/radio-group' },
+    ],
+  },
+  {
+    title: 'Pickers',
+    items: [
+      { label: 'Date Picker', to: '/components/date-picker' },
+      { label: 'Date Time Picker', to: '/components/date-time-picker' },
+    ],
+  },
+  {
+    title: 'Data',
+    items: [
       { label: 'Data Table', to: '/components/data-table' },
+      { label: 'Smart Table', to: '/components/smart-table' },
+    ],
+  },
+  {
+    title: 'Feedback',
+    items: [
       { label: 'Dialog', to: '/components/dialog' },
+      { label: 'Tooltip', to: '/components/tooltip' },
+      { label: 'Skeleton', to: '/components/skeleton' },
     ],
   },
 ];
@@ -50,11 +81,40 @@ export const routes: RouteRecordRaw[] = [
     path: '/components/text-field',
     component: () => import('./pages/components/TextFieldPage.vue'),
   },
+  { path: '/components/textarea', component: () => import('./pages/components/TextareaPage.vue') },
+  {
+    path: '/components/number-field',
+    component: () => import('./pages/components/NumberFieldPage.vue'),
+  },
+  {
+    path: '/components/money-field',
+    component: () => import('./pages/components/MoneyFieldPage.vue'),
+  },
   { path: '/components/select', component: () => import('./pages/components/SelectPage.vue') },
+  { path: '/components/checkbox', component: () => import('./pages/components/CheckboxPage.vue') },
+  { path: '/components/switch', component: () => import('./pages/components/SwitchPage.vue') },
+  {
+    path: '/components/radio-group',
+    component: () => import('./pages/components/RadioGroupPage.vue'),
+  },
+  {
+    path: '/components/date-picker',
+    component: () => import('./pages/components/DatePickerPage.vue'),
+  },
+  {
+    path: '/components/date-time-picker',
+    component: () => import('./pages/components/DateTimePickerPage.vue'),
+  },
   {
     path: '/components/data-table',
     component: () => import('./pages/components/DataTablePage.vue'),
   },
+  {
+    path: '/components/smart-table',
+    component: () => import('./pages/components/SmartTablePage.vue'),
+  },
   { path: '/components/dialog', component: () => import('./pages/components/DialogPage.vue') },
+  { path: '/components/tooltip', component: () => import('./pages/components/TooltipPage.vue') },
+  { path: '/components/skeleton', component: () => import('./pages/components/SkeletonPage.vue') },
   { path: '/:pathMatch(.*)*', redirect: '/' },
 ];
